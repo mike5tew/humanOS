@@ -1,0 +1,191 @@
+{
+  "barriers": [
+    {
+      "id": "lack_of_motivation",
+      "name": "Lack of Motivation",
+      "category": "chronic",
+      "description": "Student shows consistent disengagement and minimal effort",
+      "activatedETPs": ["comfort", "boredom", "avoidance"],
+      "avoidanceTactics": [
+        "i_dont_know",
+        "minimal_effort",
+        "waiting_for_instructions",
+        "distraction_seeking"
+      ],
+      "effectiveLevers": [
+        {
+          "name": "game_reward_system",
+          "description": "5-minute game access after task completion",
+          "steps": [
+            "Define clear micro-goals",
+            "Offer game reward immediately after completion",
+            "Gradually extend work duration required",
+            "Transition to intrinsic motivation"
+          ],
+          "etpReduction": ["boredom", "frustration"],
+          "brainStateTarget": "trigger_reward_seeking"
+        },
+        {
+          "name": "ban_i_dont_know",
+          "description": "Block the primary avoidance phrase",
+          "steps": [
+            "Explain that 'I don't know' is not acceptable",
+            "Provide thinking prompts instead",
+            "Frame as 'What do you think?' or 'Make a guess'",
+            "Celebrate attempts even if wrong"
+          ],
+          "etpReduction": ["avoidance", "fear"],
+          "brainStateTarget": "force_engagement"
+        }
+      ]
+    },
+    {
+      "id": "confrontational_showoff",
+      "name": "Confrontational Showoff Pattern",
+      "category": "chronic",
+      "description": "Student gains status by being confrontational and taking teachers to pieces",
+      "activatedETPs": ["status", "entertainment", "belonging", "power"],
+      "avoidanceTactics": [
+        "straight_up_confrontational",
+        "deliberately_obnoxious",
+        "blank_you_completely",
+        "perform_for_peer_audience"
+      ],
+      "effectiveLevers": [
+        {
+          "name": "micro_goal_celebration",
+          "description": "Every small goal is a victory - lower bar to ground level",
+          "steps": [
+            "Find ANY tiny thing to recognize",
+            "Pile on praise disproportionately",
+            "Write one word → celebrate",
+            "Stay in room → acknowledge"
+          ],
+          "etpReduction": ["defiance", "shame"],
+          "brainStateTarget": "build_positive_association"
+        },
+        {
+          "name": "non_work_relationship",
+          "description": "Chat is not all about work - build human connection",
+          "steps": [
+            "Show interest in their life outside class",
+            "Talk about their interests and hobbies",
+            "Build trust through non-academic conversation",
+            "Create safe relationship space"
+          ],
+          "etpReduction": ["rejection", "threat_avoidance"],
+          "brainStateTarget": "lower_emotional_voltage"
+        }
+      ]
+    },
+    {
+      "id": "silent_avoider",
+      "name": "Silent Avoider (Hider)",
+      "category": "chronic",
+      "description": "Student stays quiet and does nothing, hoping to be overlooked",
+      "activatedETPs": ["fear", "shame", "safety_through_invisibility"],
+      "avoidanceTactics": [
+        "stay_quiet_dont_work",
+        "avoid_eye_contact",
+        "minimal_response",
+        "waiting_to_be_forgotten"
+      ],
+      "effectiveLevers": [
+        {
+          "name": "shoulder_sitting_intensive_support",
+          "description": "Massive time investment with constant proximity",
+          "steps": [
+            "Sit metaphorically on their shoulder",
+            "Start with tiniest tasks: 'Write your name'",
+            "Celebrate micro-progress molecule by molecule",
+            "Never give up, never move on to avoid pain",
+            "Accept months-to-years timeline"
+          ],
+          "etpReduction": ["fear", "shame", "abandonment"],
+          "brainStateTarget": "build_confidence_molecule_by_molecule",
+          "timeInvestment": "10+ hours per week per student",
+          "expectedTimeline": "months to years"
+        }
+      ]
+    },
+    {
+      "id": "quiet_playful_avoider",
+      "name": "Quiet Playful Avoider",
+      "category": "chronic",
+      "description": "Student prefers play and social interaction, quietly avoids work without confrontation",
+      "activatedETPs": ["play", "social_connection", "comfort", "avoidance"],
+      "avoidanceTactics": [
+        "engage_in_play_instead_of_work",
+        "socialize_quietly",
+        "appear_busy_while_avoiding",
+        "redirect_to_games_and_fun"
+      ],
+      "effectiveLevers": [
+        {
+          "name": "play_at_their_level",
+          "description": "Meet them in their play space without shame",
+          "steps": [
+            "Join their play activity authentically",
+            "Build relationship through playful interaction",
+            "Gradually introduce work elements into play",
+            "Frame work as collaborative fun",
+            "Never shame the play impulse"
+          ],
+          "etpReduction": ["shame", "rejection", "pressure"],
+          "brainStateTarget": "build_trust_through_play"
+        },
+        {
+          "name": "play_break_graduation",
+          "description": "Structured progression from play to work with gradual extension",
+          "steps": [
+            "Stage 1: Work 5 min → 5 min play break",
+            "Stage 2: Work until natural break → play reward",
+            "Stage 3: Exam period concentration (no breaks during task)",
+            "Stage 4: Transition to praise-based motivation"
+          ],
+          "etpReduction": ["boredom", "frustration", "pressure"],
+          "brainStateTarget": "gradually_build_concentration"
+        }
+      ]
+    },
+    {
+      "id": "high_achiever",
+      "name": "High Achiever / Model Student",
+      "category": "acute",
+      "description": "Student with strong home support and baseline motivation, but risks burnout",
+      "activatedETPs": ["achievement", "status", "mastery", "pressure"],
+      "avoidanceTactics": [
+        "constant_work_panic",
+        "perfectionism",
+        "inability_to_stop"
+      ],
+      "effectiveLevers": [
+        {
+          "name": "mental_health_override",
+          "description": "Push back against constant work panic explicitly",
+          "steps": [
+            "Identify students in constant work mode",
+            "Direct conversation: 'You need to stop sometimes'",
+            "Frame rest as performance enhancer",
+            "Provide permission to not work",
+            "Monitor for burnout signs"
+          ],
+          "etpReduction": ["panic", "pressure"],
+          "brainStateTarget": "prevent_burnout"
+        },
+        {
+          "name": "advanced_content_feeding",
+          "description": "Keep them interested with challenging material",
+          "steps": [
+            "Provide access to advanced/university level content",
+            "Frame as 'grown-up treatment'",
+            "Connect to real-world applications",
+            "Let them show off knowledge to parents"
+          ],
+          "etpReduction": ["boredom"],
+          "brainStateTarget": "maintain_engagement"
+        }
+      ]
+    }
+  ]
+}

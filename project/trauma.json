@@ -1,0 +1,313 @@
+{
+  "_id": "humanos_trauma_detection_framework_v1",
+  "parentFramework": "humanos_etp_framework_v1",
+  "createdDate": "2025-11-10",
+  "purpose": "Detect trauma indicators and provide appropriate safeguarding response",
+  
+  "criticalWarning": {
+    "statement": "Trauma detection requires robust, detailed, and immediate response",
+    "legalObligation": "Many jurisdictions have mandatory reporting requirements",
+    "aiLimitation": "AI cannot replace trained safeguarding professionals",
+    "protocol": "Detection triggers immediate escalation to human safeguarding team"
+  },
+  
+  "traumaIndicators": {
+    "inappropriateSexualization": {
+      "category": "high_priority_safeguarding_concern",
+      "indicators": [
+        {
+          "type": "explicit_sexual_content",
+          "examples": [
+            "Detailed knowledge of sexual acts inappropriate for age",
+            "Explicit sexual language beyond age-typical curiosity",
+            "Sexualized drawings or descriptions",
+            "Sexual content in responses to non-sexual prompts"
+          ],
+          "significance": "May indicate exposure to sexual content or abuse"
+        },
+        {
+          "type": "sexualized_behavior_references",
+          "examples": [
+            "References to sexual interactions with adults",
+            "Describing own sexualized behavior",
+            "Inappropriate physical contact descriptions",
+            "Grooming language patterns"
+          ],
+          "significance": "Potential indicators of sexual abuse"
+        },
+        {
+          "type": "age_inappropriate_knowledge",
+          "examples": [
+            "Young child (under 10) with detailed sexual knowledge",
+            "Casual references to sexual content as if normal",
+            "Confusion about appropriate/inappropriate touch",
+            "Describing sexual situations matter-of-factly"
+          ],
+          "significance": "Knowledge typically acquired through exposure or victimization"
+        }
+      ],
+      
+      "detectionApproach": {
+        "primaryMethod": "Natural language processing for sexual content",
+        "ageCalibration": "What's concerning at age 7 may be normal at age 15",
+        "contextMatters": "Distinguish between age-appropriate curiosity and concerning knowledge",
+        "falsePositives": "Adolescent inappropriate humor vs. trauma indicators"
+      },
+      
+      "immediateResponse": {
+        "doNot": [
+          "Continue conversation as if nothing happened",
+          "Ask probing questions about sexual content",
+          "Express shock or judgment",
+          "Ignore or minimize"
+        ],
+        "do": [
+          "Immediately flag for human review",
+          "Provide neutral, non-judgmental response",
+          "Redirect conversation gently",
+          "Log interaction with full context",
+          "Escalate to safeguarding team"
+        ],
+        "aiResponse": {
+          "template": "I need to pause our conversation here. Let me connect you with someone who can help better.",
+          "rationale": "Don't engage with content, don't alarm student, escalate immediately"
+        }
+      }
+    },
+    
+    "exaggeratedAggression": {
+      "category": "medium_to_high_priority_concern",
+      "indicators": [
+        {
+          "type": "violent_ideation",
+          "examples": [
+            "Detailed descriptions of violence toward self or others",
+            "Fantasies of harming specific people",
+            "Planning or discussing violent acts",
+            "Preoccupation with weapons or violence"
+          ],
+          "significance": "May indicate trauma exposure, abuse, or risk to self/others"
+        },
+        {
+          "type": "normalized_violence",
+          "examples": [
+            "Casual references to extreme violence at home",
+            "Describing witnessing violence matter-of-factly",
+            "Violence as problem-solving strategy",
+            "Desensitization to violent content"
+          ],
+          "significance": "Possible domestic violence exposure"
+        },
+        {
+          "type": "disproportionate_reactions",
+          "examples": [
+            "Extreme rage over minor triggers",
+            "Threats of violence in response to small frustrations",
+            "Physical aggression as first response",
+            "Inability to regulate anger"
+          ],
+          "significance": "Trauma response or modeling of aggressive environment"
+        }
+      ],
+      
+      "differentialDiagnosis": {
+        "normalRange": {
+          "description": "Age-appropriate aggression expression",
+          "examples": [
+            "Adolescent anger and frustration (temporary)",
+            "Venting about annoying situations",
+            "Video game violence references (in context)",
+            "Normal boundary testing"
+          ]
+        },
+        "concerningPatterns": {
+          "description": "Trauma-linked aggression",
+          "examples": [
+            "Persistent, intense violent fantasies",
+            "Specific threats toward identifiable people",
+            "Violence as only emotional expression",
+            "Regression to aggression after progress"
+          ]
+        }
+      },
+      
+      "immediateResponse": {
+        "riskAssessment": {
+          "immediateDanger": {
+            "indicators": [
+              "Specific plan to harm self or others",
+              "Access to means (weapons mentioned)",
+              "Intent stated clearly",
+              "Timeline mentioned"
+            ],
+            "action": "IMMEDIATE escalation to emergency services and safeguarding team",
+            "aiResponse": "I'm very concerned about what you've shared. I need to connect you with someone who can help right away."
+          },
+          "elevatedConcern": {
+            "indicators": [
+              "Frequent violent ideation without plan",
+              "Describing witnessed violence",
+              "Disproportionate aggression",
+              "Normalized violence references"
+            ],
+            "action": "Flag for safeguarding review within 24 hours",
+            "aiResponse": "I hear you're dealing with some difficult feelings. Let's take a break and I'll make sure you get some support."
+          }
+        }
+      }
+    },
+    
+    "otherTraumaIndicators": {
+      "categories": [
+        {
+          "type": "neglect_indicators",
+          "examples": [
+            "Constant hunger references",
+            "Lack of basic care (hygiene, clothing)",
+            "Left alone for extended periods",
+            "No adult supervision regularly"
+          ]
+        },
+        {
+          "type": "emotional_abuse_indicators",
+          "examples": [
+            "Extreme self-criticism",
+            "References to harsh punishment",
+            "Fear of making mistakes",
+            "Describing humiliation by adults"
+          ]
+        },
+        {
+          "type": "physical_abuse_indicators",
+          "examples": [
+            "Describing physical punishment beyond reasonable discipline",
+            "Fear of going home",
+            "Unexplained injuries (if video)",
+            "Flinching or fear responses"
+          ]
+        },
+        {
+          "type": "domestic_violence_exposure",
+          "examples": [
+            "Witnessing violence between adults",
+            "Describing police visits to home",
+            "Fear for parent's safety",
+            "Modeling aggressive relationship patterns"
+          ]
+        }
+      ]
+    }
+  },
+  
+  "detectionSystem": {
+    "nlpPatterns": {
+      "sexual_content_keywords": [
+        "[List maintained in secure, non-public system]",
+        "Age-calibrated sensitivity",
+        "Context-aware matching"
+      ],
+      "violence_keywords": [
+        "[Threat-specific terms]",
+        "Intensity scoring",
+        "Intent vs. venting differentiation"
+      ],
+      "abuse_indicators": [
+        "[Descriptions of harm]",
+        "Neglect language patterns",
+        "Fear-based references"
+      ]
+    },
+    
+    "contextualAnalysis": {
+      "ageCalibration": "Same content has different significance at different ages",
+      "frequencyTracking": "One-off vs. persistent patterns",
+      "intensityScoring": "Mild concern vs. severe indicators",
+      "changeDetection": "Sudden shift in behavior/language"
+    },
+    
+    "escalationMatrix": {
+      "level1_monitoring": {
+        "trigger": "Single mild indicator",
+        "action": "Log, monitor for patterns, no immediate escalation",
+        "review": "Weekly aggregate review"
+      },
+      "level2_concern": {
+        "trigger": "Multiple mild indicators or single moderate",
+        "action": "Flag for safeguarding team review within 48 hours",
+        "aiResponse": "Neutral redirect, supportive tone"
+      },
+      "level3_serious": {
+        "trigger": "Severe indicator or persistent pattern",
+        "action": "Immediate safeguarding team notification",
+        "aiResponse": "Supportive, connecting to help"
+      },
+      "level4_emergency": {
+        "trigger": "Imminent risk to self or others",
+        "action": "Immediate emergency services contact + safeguarding",
+        "aiResponse": "Crisis response, connecting to immediate help"
+      }
+    }
+  },
+  
+  "aiResponseProtocols": {
+    "onDetection": {
+      "principle": "Don't engage with concerning content, escalate immediately",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Classify severity level",
+          "method": "Automatic scoring + human review trigger"
+        },
+        {
+          "step": 2,
+          "action": "Generate appropriate response",
+          "method": "Template-based, calibrated to severity"
+        },
+        {
+          "step": 3,
+          "action": "Log full interaction context",
+          "method": "Secure storage, timestamp, student ID"
+        },
+        {
+          "step": 4,
+          "action": "Trigger escalation workflow",
+          "method": "Notify safeguarding team per severity level"
+        },
+        {
+          "step": 5,
+          "action": "Provide student with support message",
+          "method": "Non-judgmental, connecting to help"
+        }
+      ],
+      
+      "responseTemplates": {
+        "level2_3": {
+          "message": "Thanks for sharing that with me. I think it would be helpful for you to talk with someone who specializes in these kinds of situations. I'm going to connect you with [support person].",
+          "tone": "Supportive, non-judgmental, not alarming"
+        },
+        "level4_emergency": {
+          "message": "I'm really concerned about what you've shared. Your safety is the most important thing right now. I'm connecting you with someone who can help immediately. Please stay with me.",
+          "tone": "Serious, supportive, immediate action"
+        }
+      }
+    }
+  },
+  
+  "humanSafeguardingIntegration": {
+    "required": "AI cannot handle safeguarding alone",
+    "workflow": {
+      "detection": "AI flags concern",
+      "notification": "Safeguarding team alerted with full context",
+      "review": "Trained professional assesses",
+      "action": "Appropriate intervention per local policy/law",
+      "feedback": "Outcome logged to improve detection"
+    },
+    
+    "legalCompliance": {
+      "mandatoryReporting": "Many jurisdictions require reporting suspected abuse",
+      "dataProtection": "Sensitive information handling per GDPR/local law",
+      "auditTrail": "Complete record of detection → escalation → outcome",
+      "professionalStandards": "Follow local safeguarding frameworks"
+    }
+  }
+}

@@ -1,0 +1,301 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # API Gateway & Reverse Proxy
+  # ==========================================
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/api-gateway.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - humanos-api
+      - chisg-api
+      - skillsmap-api
+      - esp-data-api
+      - esp-assist-api
+    networks:
+      - frontend-network
+      - backend-network
+    restart: unless-stopped
+
+  # ==========================================
+  # Core Learning Services
+  # ==========================================
+  
+  chisg-api:
+    build:
+      context: ./services/chisg
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - PORT=8082
+      - WEAVIATE_URL=http://weaviate:8080
+      - MONGODB_URI=mongodb://mongodb:27017/chisg
+    depends_on:
+      - mongodb
+      - weaviate
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  skillsmap-api:
+    build:
+      context: ./services/skillsmap
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - PORT=8083
+      - MONGODB_URI=mongodb://mongodb:27017/skillsmap
+    depends_on:
+      - mongodb
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  mindmap-api:
+    build:
+      context: ./services/mindmap
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+    environment:
+      - PORT=8084
+      - MONGODB_URI=mongodb://mongodb:27017/mindmap
+    depends_on:
+      - mongodb
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  heatmap-api:
+    build:
+      context: ./services/heatmap
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8085"
+    environment:
+      - PORT=8085
+      - MONGODB_URI=mongodb://mongodb:27017/heatmap
+    depends_on:
+      - mongodb
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  # ==========================================
+  # Human Behavior Services
+  # ==========================================
+  
+  humanos-api:
+    build:
+      context: ./services/humanos
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - MONGODB_URI=mongodb://mongodb:27017/humanos
+      - WEAVIATE_URL=http://weaviate:8080
+      - CHISG_API_URL=http://chisg-api:8082
+      - SKILLSMAP_API_URL=http://skillsmap-api:8083
+    volumes:
+      - ./shared/schemas:/app/schemas:ro
+    depends_on:
+      - mongodb
+      - weaviate
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  esp-behavior-lite:
+    build:
+      context: ./services/esp-behavior-lite
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8086"
+    environment:
+      - PORT=8086
+      - MONGODB_URI=mongodb://mongodb:27017/behavior
+      - HUMANOS_API_URL=http://humanos-api:8080
+    depends_on:
+      - mongodb
+      - humanos-api
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  esp-behavior-plus:
+    build:
+      context: ./services/esp-behavior-plus
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8087"
+    environment:
+      - PORT=8087
+      - MONGODB_URI=mongodb://mongodb:27017/behavior
+      - ESP_BEHAVIOR_LITE_URL=http://esp-behavior-lite:8086
+    depends_on:
+      - mongodb
+      - esp-behavior-lite
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  # ==========================================
+  # Planning Services
+  # ==========================================
+  
+  esp-data-api:
+    build:
+      context: ./services/esp-data
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8088"
+    environment:
+      - PORT=8088
+      - MONGODB_URI=mongodb://mongodb:27017/esp_data
+      - MS_GRAPH_CLIENT_ID=${MS_GRAPH_CLIENT_ID}
+      - MS_GRAPH_CLIENT_SECRET=${MS_GRAPH_CLIENT_SECRET}
+    depends_on:
+      - mongodb
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  esp-seating:
+    build:
+      context: ./services/esp-seating
+      dockerfile: Dockerfile
+    ports:
+      - "8089:8089"
+    environment:
+      - PORT=8089
+      - MONGODB_URI=mongodb://mongodb:27017/seating
+      - ESP_DATA_API_URL=http://esp-data-api:8088
+    depends_on:
+      - mongodb
+      - esp-data-api
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  # ==========================================
+  # Infrastructure Services
+  # ==========================================
+  
+  esp-assist-api:
+    build:
+      context: ./services/esp-assist
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    environment:
+      - PORT=8090
+      - WEAVIATE_URL=http://weaviate:8080
+      - MONGODB_URI=mongodb://mongodb:27017/esp_assist
+      - CHISG_API_URL=http://chisg-api:8082
+      - HUMANOS_API_URL=http://humanos-api:8080
+    depends_on:
+      - weaviate
+      - mongodb
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  pdf-rag:
+    build:
+      context: ./services/pdf-rag
+      dockerfile: Dockerfile
+    ports:
+      - "8091:8091"
+    environment:
+      - PORT=8091
+      - MONGODB_URI=mongodb://mongodb:27017/pdf_rag
+      - WEAVIATE_URL=http://weaviate:8080
+    depends_on:
+      - mongodb
+      - weaviate
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  # ==========================================
+  # Databases & Storage
+  # ==========================================
+  
+  mongodb:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d:ro
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER:-admin}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD:-password}
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  weaviate:
+    image: semitechnologies/weaviate:latest
+    ports:
+      - "8081:8080"
+    environment:
+      - AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=true
+      - PERSISTENCE_DATA_PATH=/var/lib/weaviate
+      - DEFAULT_VECTORIZER_MODULE=text2vec-openai
+      - ENABLE_MODULES=text2vec-openai
+      - OPENAI_APIKEY=${OPENAI_API_KEY}
+    volumes:
+      - weaviate-data:/var/lib/weaviate
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  # ==========================================
+  # Frontend Applications
+  # ==========================================
+  
+  web-display:
+    build:
+      context: ./frontend/web-display
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_GATEWAY_URL=/api
+    depends_on:
+      - nginx
+    networks:
+      - frontend-network
+    restart: unless-stopped
+
+  mobile-app:
+    build:
+      context: ./frontend/mobile
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - VITE_API_GATEWAY_URL=/api
+    networks:
+      - frontend-network
+    restart: unless-stopped
+
+networks:
+  frontend-network:
+    driver: bridge
+  backend-network:
+    driver: bridge
+
+volumes:
+  mongodb-data:
+  weaviate-data:

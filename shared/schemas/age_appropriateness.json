@@ -1,0 +1,136 @@
+{
+  "ageGroups": [
+    {
+      "name": "Early Primary (5-7 years, Year 1-2)",
+      "characteristics": [
+        "Concrete thinking only",
+        "Short attention span (5-10 min)",
+        "Learning basic social rules",
+        "Very literal interpretation"
+      ],
+      "languageGuidelines": {
+        "vocabulary": "Simple, everyday words only",
+        "sentenceLength": "Short (5-8 words max)",
+        "concepts": "Concrete, visible, tangible",
+        "examples": [
+          "Good: 'Let's try this together'",
+          "Bad: 'Consider this approach'",
+          "Good: 'You did great!'",
+          "Bad: 'Your effort demonstrates growth'"
+        ]
+      },
+      "emotionalCapabilities": {
+        "canUnderstand": ["happy", "sad", "angry", "scared", "excited"],
+        "developing": ["frustrated", "disappointed", "proud"],
+        "notYet": ["anxious", "conflicted", "ambivalent"]
+      }
+    },
+    {
+      "name": "Middle Primary (8-9 years, Year 3-4)",
+      "characteristics": [
+        "Beginning abstract thought",
+        "Attention span 15-20 min",
+        "Understanding cause-effect",
+        "Developing self-awareness"
+      ],
+      "languageGuidelines": {
+        "vocabulary": "Expand to include simple abstract terms",
+        "sentenceLength": "Moderate (8-12 words)",
+        "concepts": "Mix concrete with simple abstract",
+        "examples": [
+          "Good: 'This feels hard because it's new'",
+          "Bad: 'The cognitive load is challenging'",
+          "Good: 'Your brain is learning new patterns'",
+          "Bad: 'Neural plasticity is occurring'"
+        ]
+      },
+      "emotionalCapabilities": {
+        "canUnderstand": ["happy", "sad", "angry", "scared", "excited", "frustrated", "disappointed", "proud"],
+        "developing": ["anxious", "embarrassed", "jealous"],
+        "notYet": ["conflicted", "ambivalent", "resigned"]
+      }
+    },
+    {
+      "name": "Upper Primary (10-11 years, Year 5-6)",
+      "characteristics": [
+        "Abstract thinking developing",
+        "Attention span 20-30 min",
+        "Self-consciousness emerging",
+        "Peer opinion highly valued"
+      ],
+      "languageGuidelines": {
+        "vocabulary": "Can handle more complex terms with explanation",
+        "sentenceLength": "Full sentences (12-15 words)",
+        "concepts": "Abstract concepts with concrete examples",
+        "examples": [
+          "Good: 'Your brain builds new connections when you practice'",
+          "Bad: 'Neuroplasticity facilitates skill acquisition'",
+          "Good: 'Making mistakes is how we learn'",
+          "Bad: 'Error-driven learning optimizes cognitive schemas'"
+        ]
+      },
+      "emotionalCapabilities": {
+        "canUnderstand": ["most basic emotions", "embarrassed", "jealous", "anxious"],
+        "developing": ["conflicted feelings", "long-term consequences"],
+        "notYet": ["complex emotional trade-offs", "existential concepts"]
+      }
+    },
+    {
+      "name": "Early Secondary (11-13 years, Year 7-9)",
+      "characteristics": [
+        "Abstract thinking established",
+        "Attention varies widely",
+        "Identity formation critical",
+        "Hormonal/emotional volatility"
+      ],
+      "languageGuidelines": {
+        "vocabulary": "Adult vocabulary acceptable with context",
+        "sentenceLength": "Normal adult sentences",
+        "concepts": "Complex ideas with scaffolding",
+        "examples": [
+          "Good: 'Your prefrontal cortex is still developing—that's why planning ahead feels hard'",
+          "Good: 'Emotional reactions can override logical thinking'",
+          "Avoid: Condescending simplification",
+          "Avoid: Assuming adult emotional regulation"
+        ]
+      },
+      "emotionalCapabilities": {
+        "canUnderstand": ["complex emotions", "conflicting feelings", "social nuance"],
+        "developing": ["emotional regulation", "long-term thinking", "consequence assessment"],
+        "notYet": ["full prefrontal cortex function", "consistent self-regulation"]
+      }
+    }
+  ],
+  "offenseRiskFactors": [
+    {
+      "issue": "Talking down / Condescension",
+      "riskGroups": ["10+"],
+      "examples": [
+        "Using baby talk with 10-year-olds",
+        "Over-simplifying for teenagers",
+        "Explaining obvious things"
+      ],
+      "prevention": "Match vocabulary to upper end of their capability"
+    },
+    {
+      "issue": "Age-inappropriate complexity",
+      "riskGroups": ["5-9"],
+      "examples": [
+        "Abstract psychological concepts with young children",
+        "Complex metaphors",
+        "Multi-step reasoning chains"
+      ],
+      "prevention": "Use concrete examples and simple language"
+    },
+    {
+      "issue": "Ignoring developmental stage",
+      "riskGroups": ["all"],
+      "examples": [
+        "Expecting 7-year-olds to plan long-term",
+        "Assuming 12-year-olds have emotional regulation",
+        "Treating all teenagers the same"
+      ],
+      "prevention": "Reference age-specific capabilities table before responding"
+    }
+  ]
+}

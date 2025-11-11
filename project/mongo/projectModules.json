@@ -1,0 +1,541 @@
+{
+  "_id": "project_portfolio_analysis",
+  "analysisDate": "2025-11-10",
+  "portfolioType": "educational_technology",
+  
+  "modularizationAnalysis": {
+    "coreModules": [
+      {
+        "moduleName": "SkillsMappingEngine",
+        "components": ["1", "26", "27"],
+        "purpose": "Universal skills tracking and visualization",
+        "reusability": "HIGH",
+        "dependencies": []
+      },
+      {
+        "moduleName": "KnowledgeGraphCore",
+        "components": ["2", "3", "4"],
+        "purpose": "Semantic knowledge representation",
+        "reusability": "HIGH", 
+        "dependencies": ["SkillsMappingEngine"]
+      },
+      {
+        "moduleName": "HumanOSFramework",
+        "components": ["5"],
+        "purpose": "Emotional intelligence and engagement modeling",
+        "reusability": "HIGH",
+        "dependencies": []
+      },
+      {
+        "moduleName": "AIAssistantCore",
+        "components": ["6", "18", "29"],
+        "purpose": "Conversational AI with RAG capabilities",
+        "reusability": "HIGH",
+        "dependencies": ["KnowledgeGraphCore", "HumanOSFramework"]
+      },
+      {
+        "moduleName": "MicrosoftIntegration",
+        "components": ["7", "8", "9"],
+        "purpose": "OAuth and Microsoft Graph integration",
+        "reusability": "MEDIUM",
+        "dependencies": []
+      },
+      {
+        "moduleName": "EducationalPlanning",
+        "components": ["10", "11", "12", "13"],
+        "purpose": "Curriculum and lesson planning automation",
+        "reusability": "MEDIUM",
+        "dependencies": ["SkillsMappingEngine"]
+      },
+      {
+        "moduleName": "BehaviorManagement",
+        "components": ["14", "15", "16", "17", "19", "21"],
+        "purpose": "Student engagement and behavior tracking",
+        "reusability": "MEDIUM",
+        "dependencies": ["HumanOSFramework"]
+      }
+    ],
+    
+    "specializedApplications": [
+      {
+        "moduleName": "SubjectSpecificAssistants",
+        "components": ["23", "24", "25"],
+        "purpose": "Domain-specific knowledge bases",
+        "reusability": "LOW",
+        "dependencies": ["AIAssistantCore", "KnowledgeGraphCore"]
+      },
+      {
+        "moduleName": "FederatedLearning",
+        "components": ["30"],
+        "purpose": "Privacy-preserving pattern learning",
+        "reusability": "MEDIUM",
+        "dependencies": ["AIAssistantCore", "HumanOSFramework"]
+      }
+    ]
+  },
+  
+  "implementationPriority": {
+    "phase1_immediate_income": [
+      {
+        "project": "AI Portfolio",
+        "priority": 1,
+        "timeline": "1-2 months",
+        "components": ["4", "5", "18"],
+        "rationale": "Fastest path to employment as AI Solutions Architect",
+        "expectedOutcome": "Job placement with 80-120k salary"
+      }
+    ],
+    
+    "phase2_quick_revenue": [
+      {
+        "project": "GCSE Revision Tool", 
+        "priority": 2,
+        "timeline": "2-3 months",
+        "components": ["23", "1", "18", "29"],
+        "rationale": "Immediate family need + clear monetization path",
+        "expectedOutcome": "Paid subscriptions within 6 months"
+      }
+    ],
+    
+    "phase3_collaborator_commitments": [
+      {
+        "project": "Skills Tree Rising",
+        "priority": 3, 
+        "timeline": "3-4 months",
+        "components": ["1", "18", "8", "26"],
+        "rationale": "Existing collaborators ready for business launch",
+        "expectedOutcome": "Revenue sharing from leadership courses"
+      }
+    ],
+    
+    "phase4_strategic_development": [
+      {
+        "project": "Solo Skills Map",
+        "priority": 4,
+        "timeline": "4-6 months", 
+        "components": ["1", "18", "22", "27", "28"],
+        "rationale": "Builds on Phase 1-3 work, clear B2C product",
+        "expectedOutcome": "Standalone SaaS product"
+      }
+    ],
+    
+    "phase5_research_development": [
+      {
+        "project": "Immunology Assistant",
+        "priority": 5,
+        "timeline": "6+ months",
+        "components": ["24", "4", "6"],
+        "rationale": "Personal commitment, builds research credibility",
+        "expectedOutcome": "Academic/medical tool with potential licensing"
+      }
+    ]
+  },
+  
+  "componentStatus": {
+    "components": [
+      {
+        "id": 1,
+        "name": "skills map display",
+        "project": "skills docker",
+        "completion": 80,
+        "description": "Maps development based on skills advancement",
+        "todo": "Need to shade in according to scores",
+        "module": "SkillsMappingEngine"
+      },
+      {
+        "id": 2,
+        "name": "mind-map",
+        "project": "esp data", 
+        "completion": 80,
+        "description": "Draws knowledge elements and connections between them",
+        "todo": "",
+        "module": "KnowledgeGraphCore"
+      },
+      {
+        "id": 3,
+        "name": "heat map",
+        "project": "esp data",
+        "completion": 50,
+        "description": "Shades the heat map based on current knowledge",
+        "todo": "",
+        "module": "KnowledgeGraphCore"
+      },
+      {
+        "id": 4,
+        "name": "CHISG",
+        "project": "esp assist",
+        "completion": 60,
+        "description": "Maps knowledge using semantic links and metadata in weaviate",
+        "todo": "",
+        "module": "KnowledgeGraphCore"
+      },
+      {
+        "id": 5,
+        "name": "Human OS",
+        "project": "humanOS", 
+        "completion": 20,
+        "description": "Maps human behaviour using emotional trigger points",
+        "todo": "",
+        "module": "HumanOSFramework"
+      },
+      {
+        "id": 6,
+        "name": "PDF RAG",
+        "project": "esp-assist",
+        "completion": 90,
+        "description": "Extracts text from PDFs and stores in mongodb",
+        "todo": "",
+        "module": "AIAssistantCore"
+      },
+      {
+        "id": 7,
+        "name": "MS Graph login",
+        "project": "skills docker",
+        "completion": 100,
+        "description": "Links to microsoft oauth 2",
+        "todo": "",
+        "module": "MicrosoftIntegration"
+      },
+      {
+        "id": 8,
+        "name": "MS Graph Mail",
+        "project": "esp data",
+        "completion": 60,
+        "description": "Displays headers and allows mail admin",
+        "todo": "",
+        "module": "MicrosoftIntegration"
+      },
+      {
+        "id": 9,
+        "name": "MS Graph Calendar",
+        "project": "esp data",
+        "completion": 50,
+        "description": "Combines lesson and appointment information",
+        "todo": "",
+        "module": "MicrosoftIntegration"
+      },
+      {
+        "id": 10,
+        "name": "Long term planning",
+        "project": "esp data",
+        "completion": 50,
+        "description": "Schedules topics over the year",
+        "todo": "",
+        "module": "EducationalPlanning"
+      },
+      {
+        "id": 11,
+        "name": "Medium Term planning",
+        "project": "esp data",
+        "completion": 70,
+        "description": "Schedules lessons of a topic and room bookings",
+        "todo": "",
+        "module": "EducationalPlanning"
+      },
+      {
+        "id": 12,
+        "name": "Lesson planning",
+        "project": "esp data",
+        "completion": 50,
+        "description": "Selects activities for students based on past data",
+        "todo": "",
+        "module": "EducationalPlanning"
+      },
+      {
+        "id": 13,
+        "name": "Year planner",
+        "project": "esp data",
+        "completion": 50,
+        "description": "Creates sessions for the year",
+        "todo": "",
+        "module": "EducationalPlanning"
+      },
+      {
+        "id": 14,
+        "name": "Additional needs register",
+        "project": "ESP seating",
+        "completion": 40,
+        "description": "Logs issues and actions for students with additional needs",
+        "todo": "",
+        "module": "BehaviorManagement"
+      },
+      {
+        "id": 15,
+        "name": "flick action behaviour recorder",
+        "project": "ESP Behaviour lite",
+        "completion": 40,
+        "description": "Allows four behaviours to be recorded by flicking on seat plan",
+        "todo": "",
+        "module": "BehaviorManagement"
+      },
+      {
+        "id": 16,
+        "name": "seating plan",
+        "project": "ESP Data",
+        "completion": 50,
+        "description": "Layouts seating plan in grid for student info access",
+        "todo": "",
+        "module": "BehaviorManagement"
+      },
+      {
+        "id": 17,
+        "name": "Live update to web display",
+        "project": "ESP Behaviour Lite",
+        "completion": 50,
+        "description": "Updates scoring to web display from mobile version",
+        "todo": "",
+        "module": "BehaviorManagement"
+      },
+      {
+        "id": 18,
+        "name": "AI Assistant using weaviate",
+        "project": "ESP Assist",
+        "completion": 60,
+        "description": "Stores information for AI to react to and help user",
+        "todo": "",
+        "module": "AIAssistantCore"
+      },
+      {
+        "id": 19,
+        "name": "Sanction escalator",
+        "project": "ESP Behaviour plus",
+        "completion": 50,
+        "description": "Takes behaviour data and semi-automates responses",
+        "todo": "",
+        "module": "BehaviorManagement"
+      },
+      {
+        "id": 20,
+        "name": "Location lock",
+        "project": "ESP Seating",
+        "completion": 40,
+        "description": "Restricts access to student info when not on site",
+        "todo": "",
+        "module": "BehaviorManagement"
+      },
+      {
+        "id": 21,
+        "name": "Team creation",
+        "project": "ESP Behaviour lite",
+        "completion": 40,
+        "description": "Allows teams for gamification of behaviour management",
+        "todo": "",
+        "module": "BehaviorManagement"
+      },
+      {
+        "id": 22,
+        "name": "monthly payment portal",
+        "project": "",
+        "completion": 0,
+        "description": "",
+        "todo": "",
+        "module": "BusinessInfrastructure"
+      },
+      {
+        "id": 23,
+        "name": "GCSE Science revision resource",
+        "project": "esp assist",
+        "completion": 20,
+        "description": "Loads resources using PDFs to train AI responses",
+        "todo": "",
+        "module": "SubjectSpecificAssistants"
+      },
+      {
+        "id": 24,
+        "name": "Immunology resources",
+        "project": "esp assist",
+        "completion": 20,
+        "description": "Loads resources using PDFs to train AI responses",
+        "todo": "",
+        "module": "SubjectSpecificAssistants"
+      },
+      {
+        "id": 25,
+        "name": "Civil Eng resources",
+        "project": "esp assist",
+        "completion": 0,
+        "description": "Loads resources using PDFs to train AI responses",
+        "todo": "",
+        "module": "SubjectSpecificAssistants"
+      },
+      {
+        "id": 26,
+        "name": "leadership skills map",
+        "project": "skills docker",
+        "completion": 0,
+        "description": "",
+        "todo": "",
+        "module": "SkillsMappingEngine"
+      },
+      {
+        "id": 27,
+        "name": "Career skills info",
+        "project": "skills docker",
+        "completion": 0,
+        "description": "",
+        "todo": "",
+        "module": "SkillsMappingEngine"
+      },
+      {
+        "id": 28,
+        "name": "revision methods",
+        "project": "",
+        "completion": 0,
+        "description": "",
+        "todo": "",
+        "module": "SkillsMappingEngine"
+      },
+      {
+        "id": 29,
+        "name": "Voice interface",
+        "project": "",
+        "completion": 0,
+        "description": "",
+        "todo": "",
+        "module": "AIAssistantCore"
+      },
+      {
+        "id": 30,
+        "name": "Federated chatbot",
+        "project": "",
+        "completion": 0,
+        "description": "Gathers anonymized data from student interactions",
+        "todo": "",
+        "module": "FederatedLearning"
+      }
+    ]
+  },
+  
+  "projectApplications": {
+    "applications": [
+      {
+        "id": 1,
+        "name": "Skills Tree Rising",
+        "components": ["1", "18", "8", "26"],
+        "obligationRanking": 1,
+        "financialRanking": 2,
+        "description": "Leadership skills teaching business with collaborators",
+        "priority": "HIGH",
+        "timeline": "3-4 months"
+      },
+      {
+        "id": 2, 
+        "name": "Solo Skills Map",
+        "components": ["1", "18", "22", "27", "28"],
+        "obligationRanking": 2,
+        "financialRanking": 1,
+        "description": "Personal skills repository for CV generation and career development",
+        "priority": "MEDIUM",
+        "timeline": "4-6 months"
+      },
+      {
+        "id": 3,
+        "name": "ESP Data",
+        "components": ["1-21", "23", "24"],
+        "obligationRanking": 0,
+        "financialRanking": 0,
+        "description": "Comprehensive school MIS with skills-based assessment",
+        "priority": "LOW",
+        "timeline": "Long-term"
+      },
+      {
+        "id": 4,
+        "name": "AI Portfolio",
+        "components": ["4", "5"],
+        "obligationRanking": 0,
+        "financialRanking": 3,
+        "description": "Demo projects for AI Solutions Architect job applications",
+        "priority": "CRITICAL",
+        "timeline": "1-2 months"
+      },
+      {
+        "id": 5,
+        "name": "Personal Assistant",
+        "components": ["18", "6"],
+        "obligationRanking": 0,
+        "financialRanking": 0,
+        "description": "AI with access to work history and project materials",
+        "priority": "LOW",
+        "timeline": "Long-term"
+      },
+      {
+        "id": 6,
+        "name": "Research Tools",
+        "components": ["4", "6", "24"],
+        "obligationRanking": 0,
+        "financialRanking": 0,
+        "description": "Knowledge graph for research area identification and AI hallucination mitigation",
+        "priority": "LOW",
+        "timeline": "Long-term"
+      },
+      {
+        "id": 7,
+        "name": "Immunology Assistant",
+        "components": ["1", "2", "3", "4", "6", "24", "29"],
+        "obligationRanking": 3,
+        "financialRanking": 0,
+        "description": "Clinical pathology exam resources using research materials and CHISG",
+        "priority": "MEDIUM",
+        "timeline": "6+ months"
+      },
+      {
+        "id": 8,
+        "name": "GCSE Revision Tool",
+        "components": ["1", "2", "3", "5", "7", "23", "29"],
+        "obligationRanking": 4,
+        "financialRanking": 4,
+        "description": "Science revision assistant with paid subscription potential",
+        "priority": "HIGH",
+        "timeline": "2-3 months"
+      },
+      {
+        "id": 9,
+        "name": "Civil Engineering Tool",
+        "components": ["1", "2", "3", "5", "7", "25", "29"],
+        "obligationRanking": 0,
+        "financialRanking": 0,
+        "description": "Degree revision resource with ongoing resource loading",
+        "priority": "LOW",
+        "timeline": "Long-term"
+      }
+    ]
+  },
+  
+  "recommendedActionPlan": {
+    "month1_2": {
+      "focus": "Income Generation & Portfolio",
+      "actions": [
+        "Complete AI Portfolio (Components 4,5)",
+        "Polish existing high-completion components",
+        "Apply for AI Solutions Architect positions",
+        "Document HumanOS framework for interviews"
+      ]
+    },
+    "month3_4": {
+      "focus": "Quick Revenue & Collaborator Projects", 
+      "actions": [
+        "Launch GCSE Revision Tool MVP",
+        "Deliver Skills Tree Rising for collaborators",
+        "Begin Solo Skills Map development",
+        "Establish payment portal infrastructure"
+      ]
+    },
+    "month5_6": {
+      "focus": "Product Development & Scaling",
+      "actions": [
+        "Launch Solo Skills Map to market",
+        "Expand GCSE tool to full subject range",
+        "Begin Immunology Assistant development",
+        "Explore federated learning implementation"
+      ]
+    }
+  },
+  
+  "metadata": {
+    "totalComponents": 30,
+    "averageCompletion": 47,
+    "highValueComponents": ["1", "4", "6", "18"],
+    "criticalPath": ["4", "5", "23", "1", "18"],
+    "analysisTimestamp": "2025-11-10T00:00:00Z"
+  }
+}
