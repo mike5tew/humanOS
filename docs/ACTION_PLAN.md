@@ -3,6 +3,13 @@
 **Last Updated**: 2025-01-XX  
 **Current Focus**: AI Tutor MVP → GCSE Tool → Skills Tree Rising
 
+## Setup Complete ✅
+
+- [x] GitHub repository created
+- [x] Initial commit pushed
+- [x] Go module initialized
+- [x] Project structure organized
+
 ## Strategic Overview
 
 ### The 80/20 Principle
@@ -173,12 +180,191 @@ Create `/Users/michaelstewart/Coding/humanOS/shared/schemas/age_appropriateness.
         "offenseRisks": [
           {
             "risk": "Oversimplification",
-            "trigger": "Treating 9-year-olds like 5-year-olds
+            "trigger": "Treating 9-year-olds like 5-year-olds",
+            "prevention": "Match complexity to developmental stage"
+          },
+          {
+            "risk": "Frustration from complexity",
+            "trigger": "Long, complex sentences with abstract concepts",
+            "prevention": "Shorten sentences, use concrete examples"
+          }
+        ]
+      },
+      
+      "responseAdjustment": {
+        "before": "You need to use more effective strategies and consider the consequences of your actions.",
+        "after": "Let's find a better way to do this.",
+        "reasoning": "Shortened sentence, concrete language, removed abstract nouns (strategies, consequences)"
+      }
+    },
+    
+    {
+      "name": "Late Primary (10-11 years, Year 5-6)",
+      "ageRange": [10, 11],
+      "developmentalStage": "concrete_operational_advanced",
+      
+      "characteristics": [
+        "Abstract thinking more developed (can handle metaphors, analogies)",
+        "Attention span 20-30 minutes",
+        "Understanding of complex cause-effect relationships",
+        "Greater self-awareness and metacognition",
+        "Reading and writing at a functional adult level"
+      ],
+      
+      "languageGuidelines": {
+        "vocabulary": {
+          "level": "simple_abstract_terms_plus_some_complexity",
+          "maxSyllables": 4,
+          "canIntroduce": ["hypothesis", "analyze", "evaluate", "demonstrate"],
+          "examples": {
+            "good": "We can test this idea by trying it out.",
+            "bad": "Formulate a hypothesis and analyze the variables."
+          }
+        },
+        
+        "sentenceStructure": {
+          "maxWordsPerSentence": 15,
+          "structure": "use_of_varied_structure_including_clauses",
+          "examples": {
+            "good": "This is challenging, but we can learn from our mistakes.",
+            "bad": "The complexity of the task may lead to frustration and disengagement."
+          }
+        },
+        
+        "concepts": {
+          "allowed": "concrete_and_abstract_mixed",
+          "examples": {
+            "good": "Learning is like building a skill set for life.",
+            "bad": "Education is a tool for social mobility."
+          }
+        },
+        
+        "offenseRisks": [
+          {
+            "risk": "Patronizing language",
+            "trigger": "Talking down to preteens with simplified language",
+            "prevention": "Use respectful, age-appropriate language"
+          },
+          {
+            "risk": "Excessive complexity",
+            "trigger": "Overloading with abstract concepts and jargon",
+            "prevention": "Balance complexity with clarity"
+          }
+        ]
+      },
+      
+      "responseAdjustment": {
+        "before": "You are not using your time effectively and need to change your approach.",
+        "after": "Let's use our time better and try a different approach.",
+        "reasoning": "Shortened sentence, concrete language, removed abstract nouns (effectively, approach)"
+      }
+    },
+    
+    {
+      "name": "Secondary (12-16 years, Year 7-11)",
+      "ageRange": [12, 16],
+      "developmentalStage": "formal_operational",
+      
+      "characteristics": [
+        "Abstract and hypothetical thinking (can handle complex metaphors, analogies)",
+        "Attention span 30-60 minutes",
+        "Understanding of multifaceted cause-effect relationships",
+        "High self-awareness and metacognition",
+        "Reading and writing at a near-adult level"
+      ],
+      
+      "languageGuidelines": {
+        "vocabulary": {
+          "level": "abstract_terms_and_domain-specific_language",
+          "maxSyllables": 5,
+          "canIntroduce": ["synthesize", "evaluate", "theory", "hypothesis"],
+          "examples": {
+            "good": "We can explore this theory by examining the evidence.",
+            "bad": "Synthesize the information and evaluate the underlying hypothesis."
+          }
+        },
+        
+        "sentenceStructure": {
+          "maxWordsPerSentence": 20,
+          "structure": "varied_and_complex_structures_including_passive_voice",
+          "examples": {
+            "good": "Although this is difficult, it is important to keep trying.",
+            "bad": "The difficulty of the task may result in a lack of engagement and motivation."
+          }
+        },
+        
+        "concepts": {
+          "allowed": "abstract_and_conceptual_thinking",
+          "examples": {
+            "good": "Education is the key to unlocking potential.",
+            "bad": "Theoretical knowledge without practical application is useless."
+          }
+        },
+        
+        "offenseRisks": [
+          {
+            "risk": "Overly simplistic language",
+            "trigger": "Using basic language with teens who understand complexity",
+            "prevention": "Match language complexity to user capability"
+          },
+          {
+            "risk": "Condescension",
+            "trigger": "Talking down to teens with simplified explanations",
+            "prevention": "Use respectful, age-appropriate language"
+          }
+        ]
+      },
+      
+      "responseAdjustment": {
+        "before": "You are not approaching this with the necessary depth and rigor.",
+        "after": "Let's deepen our approach and try again.",
+        "reasoning": "Shortened sentence, concrete language, removed abstract nouns (depth, rigor)"
+      }
+    }
+  ]
+}
+```
+
+- [ ] Middle Primary (8-9 years, Year 3-4)
+- [ ] Late Primary (10-11 years, Year 5-6)
+- [ ] Secondary (12-16 years, Year 7-11)
+
+## Phase 2: Product Development & Initial Revenue (Months 3-4)
+**Goal**: Launch GCSE Tool + Skills Tree Rising beta  
+**Revenue Target**: $500-2000/month (combined)
+
+### Month 3: GCSE Tool Launch
+**Current**: 0% complete (initial setup)  
+**Target**: 100% complete (live product)
+
+**Leverages Existing Work**:
+- HumanOS Core (50% → 100% in Phase 1)
+- CHISG Integration (80% complete)
+- Payment Infrastructure (basic version)
+
+**New Work Needed**:
+- [ ] Week 1: Content loading
+  - [ ] Load GCSE exam board specifications
+  - [ ] Import existing question bank
+  - [ ] Tag questions by topic, difficulty, question type
+- [ ] Week 2: User interface
+  - [ ] Design student dashboard (progress tracking, recommendations)
+  - [ ] Create practice test interface (adaptive learning)
+  - [ ] Implement reporting dashboard (performance insights)
+- [ ] Week 3: Payment integration
+  - [ ] Set up Stripe/PayPal for subscription payments
+  - [ ] Implement invoicing and receipts
+  - [ ] Test payment flow end-to-end
+- [ ] Week 4: Marketing + launch
+  - [ ] Create landing page + SEO optimization
+  - [ ] Launch social media campaigns (Facebook, Instagram)
+  - [ ] Reach out to schools/tutors for partnerships
+
 **Success Metrics**:
-- 50+ free tier signups
-- 10+ paying subscribers (£50-100/month revenue)
-- >75% accuracy on practice questions
-- Avg 15 minutes/day engagement per active user
+- 100+ free tier signups
+- 20+ paying subscribers (£100-200/month revenue)
+- >80% accuracy on practice questions
+- Avg 20 minutes/day engagement per active user
 
 ### Month 4: Skills Tree Rising
 **Current**: 0% leadership content, 80% base complete  
