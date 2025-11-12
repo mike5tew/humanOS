@@ -1658,7 +1658,7 @@ package main
 
 import (
     "fmt"
-    "github.com/michaelstewart/humanos/internal/etp"
+    "github.com/mike5tew/humanos/internal/etp"
 )
 
 // Dashboard to help teachers navigate chaos phase
@@ -1977,7 +1977,7 @@ type ResearchMapping struct {
 package main
 
 import (
-    "github.com/michaelstewart/humanos/internal/etp"
+    "github.com/mike5tew/humanos/internal/etp"
 )
 
 // Individual AI coach MVP
@@ -2437,7 +2437,7 @@ package main
 
 import (
     "fmt"
-    "github.com/michaelstewart/humanos/internal/etp"
+    "github.com/mike5tew/humanos/internal/etp"
 )
 
 type AIStudentCoach struct {

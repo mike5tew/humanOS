@@ -41,3 +41,12 @@ data/
 *.key
 *.pem
 config/secrets.yaml
+
+# Temp/scratch directories
+scratch/
+temp/
+tmp/
+
+# Backup files
+*.bak
+*~

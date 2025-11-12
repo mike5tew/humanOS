@@ -1,4 +1,4 @@
-module github.com/michaelstewart/humanos
+module github.com/mike5tew/humanos
 
 go 1.21
 

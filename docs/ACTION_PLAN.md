@@ -9,6 +9,8 @@
 - [x] Initial commit pushed
 - [x] Go module initialized
 - [x] Project structure organized
+- [x] **Backend: Go (decision finalized)** ✅
+- [x] **TypeScript backend removed** ✅ (consolidated to Go)
 
 ## Strategic Overview
 
@@ -29,23 +31,23 @@
 **Revenue Target**: $0 (employment) + $100-500/month (early adopters)
 
 ### Week 1-2: HumanOS Core to 50%
-**Current**: 35% complete (barriers done, age filtering NOT done)
+**Current**: 40% complete (barriers done, types consolidated, age filtering NOT done)
 **Target**: 50% complete (production-ready barrier detection + age filtering)
 
 **Tasks**:
 - [x] Complete 5 barrier profile implementations ✅ DONE
-  - [x] Lack of motivation (game rewards, ban "I don't know")
-  - [x] Confrontational showoff (micro-victories, relationship building)
-  - [x] Silent avoider (proximity support)
-  - [x] Quiet playful avoider (play-based engagement)
-  - [x] High achiever (mental health override, advanced content)
-
-- [ ] **CRITICAL PRIORITY: Implement age-appropriate language adjustment** ⚠️ NOT STARTED
-  - [ ] Create age_appropriateness.json schema (detailed below)
+- [x] **Consolidate Go backend structure** ✅ DONE
+  - [x] Merged `/project/backend/` and `/backend/` into single structure
+  - [x] Extracted types from main.go into `/internal/etp/types.go`
+  - [x] Created proper package structure
+  - [x] Moved barrier detection to `/internal/barriers/`
+  
+- [ ] **CRITICAL PRIORITY: Implement age-appropriate language adjustment** ⚠️ NEXT
+  - [ ] Create `age_appropriateness.json` schema in `/shared/schemas/`
+  - [ ] Implement `age_appropriate.go` in `/backend/internal/barriers/`
   - [ ] Build language filter implementation
   - [ ] Add developmental stage detection
   - [ ] Create response adjustment logic
-  - [ ] Add offense risk checking
   - [ ] Test with sample responses across age groups
   
   **Why this is critical**: "Too young and it will cause offence" - User requirement
@@ -62,272 +64,19 @@
   - [ ] Voltage calculation
   - [ ] Intervention matching logic
 
-**Deliverable**: HumanOS API that reliably detects barriers, adjusts language for age, and suggests interventions
+**Deliverable**: Clean Go backend with proper package structure, barrier detection, and age-appropriate responses
 
-**Updated Timeline**: Week 1-2 should focus EXCLUSIVELY on age-appropriate language filtering before proceeding to other Week 1-2 tasks.
+### Week 3-4: CHISG Enhancement & Integration
+**Current**: 60% complete (separate project)
+**Target**: 80% complete (integrated with HumanOS via Go API)
 
-### Age-Appropriate Language Implementation Plan
-
-**Priority 1: Create the Schema**
-
-Create `/Users/michaelstewart/Coding/humanOS/shared/schemas/age_appropriateness.json`:
-
-```json
-{
-  "ageGroups": [
-    {
-      "name": "Early Primary (5-7 years, Year 1-2)",
-      "ageRange": [5, 7],
-      "developmentalStage": "concrete_operational_emerging",
-      
-      "characteristics": [
-        "Concrete thinking only - cannot handle abstractions",
-        "Very short attention span (5-10 minutes max)",
-        "Learning basic social rules and norms",
-        "Very literal interpretation of language",
-        "Beginning to read independently"
-      ],
-      
-      "languageGuidelines": {
-        "vocabulary": {
-          "level": "simple_everyday_words_only",
-          "maxSyllables": 2,
-          "examples": {
-            "good": ["happy", "sad", "try", "help", "work", "play"],
-            "avoid": ["consider", "analyze", "evaluate", "demonstrate"]
-          }
-        },
-        
-        "sentenceStructure": {
-          "maxWordsPerSentence": 8,
-          "structure": "subject-verb-object only",
-          "examples": {
-            "good": "Let's try this together.",
-            "bad": "Consider this approach to the problem."
-          }
-        },
-        
-        "concepts": {
-          "allowed": "concrete_visible_tangible_only",
-          "examples": {
-            "good": "The cat is big",
-            "bad": "Cats represent independence"
-          }
-        },
-        
-        "offenseRisks": [
-          {
-            "risk": "Talking down / condescension",
-            "trigger": "Using baby talk with confident 7-year-olds",
-            "prevention": "Match upper end of capability, not lower"
-          },
-          {
-            "risk": "Overwhelming complexity",
-            "trigger": "Abstract concepts, multi-step reasoning",
-            "prevention": "One concrete step at a time"
-          }
-        ]
-      },
-      
-      "responseAdjustment": {
-        "before": "You should evaluate your approach and consider alternative strategies.",
-        "after": "Let's try a different way.",
-        "reasoning": "Removed abstract verbs (evaluate, consider), shortened sentence, concrete language"
-      }
-    },
-    
-    {
-      "name": "Middle Primary (8-9 years, Year 3-4)",
-      "ageRange": [8, 9],
-      "developmentalStage": "concrete_operational_solidifying",
-      
-      "characteristics": [
-        "Beginning abstract thought (can handle simple metaphors)",
-        "Attention span 15-20 minutes",
-        "Understanding cause-effect relationships",
-        "Developing self-awareness and metacognition",
-        "Reading fluently, writing more complex sentences"
-      ],
-      
-      "languageGuidelines": {
-        "vocabulary": {
-          "level": "expand_to_simple_abstract_terms",
-          "maxSyllables": 3,
-          "canIntroduce": ["strategy", "pattern", "connection", "reason"],
-          "examples": {
-            "good": "This feels hard because it's new",
-            "bad": "The cognitive load is challenging"
-          }
-        },
-        
-        "sentenceStructure": {
-          "maxWordsPerSentence": 12,
-          "structure": "can_use_conjunctions_and_clauses",
-          "examples": {
-            "good": "This is tricky because you haven't seen it before.",
-            "bad": "The complexity arises from novel conceptual frameworks."
-          }
-        },
-        
-        "concepts": {
-          "allowed": "mix_concrete_with_simple_abstract",
-          "examples": {
-            "good": "Your brain is learning new patterns",
-            "bad": "Neural plasticity is facilitating adaptation"
-          }
-        },
-        
-        "offenseRisks": [
-          {
-            "risk": "Oversimplification",
-            "trigger": "Treating 9-year-olds like 5-year-olds",
-            "prevention": "Match complexity to developmental stage"
-          },
-          {
-            "risk": "Frustration from complexity",
-            "trigger": "Long, complex sentences with abstract concepts",
-            "prevention": "Shorten sentences, use concrete examples"
-          }
-        ]
-      },
-      
-      "responseAdjustment": {
-        "before": "You need to use more effective strategies and consider the consequences of your actions.",
-        "after": "Let's find a better way to do this.",
-        "reasoning": "Shortened sentence, concrete language, removed abstract nouns (strategies, consequences)"
-      }
-    },
-    
-    {
-      "name": "Late Primary (10-11 years, Year 5-6)",
-      "ageRange": [10, 11],
-      "developmentalStage": "concrete_operational_advanced",
-      
-      "characteristics": [
-        "Abstract thinking more developed (can handle metaphors, analogies)",
-        "Attention span 20-30 minutes",
-        "Understanding of complex cause-effect relationships",
-        "Greater self-awareness and metacognition",
-        "Reading and writing at a functional adult level"
-      ],
-      
-      "languageGuidelines": {
-        "vocabulary": {
-          "level": "simple_abstract_terms_plus_some_complexity",
-          "maxSyllables": 4,
-          "canIntroduce": ["hypothesis", "analyze", "evaluate", "demonstrate"],
-          "examples": {
-            "good": "We can test this idea by trying it out.",
-            "bad": "Formulate a hypothesis and analyze the variables."
-          }
-        },
-        
-        "sentenceStructure": {
-          "maxWordsPerSentence": 15,
-          "structure": "use_of_varied_structure_including_clauses",
-          "examples": {
-            "good": "This is challenging, but we can learn from our mistakes.",
-            "bad": "The complexity of the task may lead to frustration and disengagement."
-          }
-        },
-        
-        "concepts": {
-          "allowed": "concrete_and_abstract_mixed",
-          "examples": {
-            "good": "Learning is like building a skill set for life.",
-            "bad": "Education is a tool for social mobility."
-          }
-        },
-        
-        "offenseRisks": [
-          {
-            "risk": "Patronizing language",
-            "trigger": "Talking down to preteens with simplified language",
-            "prevention": "Use respectful, age-appropriate language"
-          },
-          {
-            "risk": "Excessive complexity",
-            "trigger": "Overloading with abstract concepts and jargon",
-            "prevention": "Balance complexity with clarity"
-          }
-        ]
-      },
-      
-      "responseAdjustment": {
-        "before": "You are not using your time effectively and need to change your approach.",
-        "after": "Let's use our time better and try a different approach.",
-        "reasoning": "Shortened sentence, concrete language, removed abstract nouns (effectively, approach)"
-      }
-    },
-    
-    {
-      "name": "Secondary (12-16 years, Year 7-11)",
-      "ageRange": [12, 16],
-      "developmentalStage": "formal_operational",
-      
-      "characteristics": [
-        "Abstract and hypothetical thinking (can handle complex metaphors, analogies)",
-        "Attention span 30-60 minutes",
-        "Understanding of multifaceted cause-effect relationships",
-        "High self-awareness and metacognition",
-        "Reading and writing at a near-adult level"
-      ],
-      
-      "languageGuidelines": {
-        "vocabulary": {
-          "level": "abstract_terms_and_domain-specific_language",
-          "maxSyllables": 5,
-          "canIntroduce": ["synthesize", "evaluate", "theory", "hypothesis"],
-          "examples": {
-            "good": "We can explore this theory by examining the evidence.",
-            "bad": "Synthesize the information and evaluate the underlying hypothesis."
-          }
-        },
-        
-        "sentenceStructure": {
-          "maxWordsPerSentence": 20,
-          "structure": "varied_and_complex_structures_including_passive_voice",
-          "examples": {
-            "good": "Although this is difficult, it is important to keep trying.",
-            "bad": "The difficulty of the task may result in a lack of engagement and motivation."
-          }
-        },
-        
-        "concepts": {
-          "allowed": "abstract_and_conceptual_thinking",
-          "examples": {
-            "good": "Education is the key to unlocking potential.",
-            "bad": "Theoretical knowledge without practical application is useless."
-          }
-        },
-        
-        "offenseRisks": [
-          {
-            "risk": "Overly simplistic language",
-            "trigger": "Using basic language with teens who understand complexity",
-            "prevention": "Match language complexity to user capability"
-          },
-          {
-            "risk": "Condescension",
-            "trigger": "Talking down to teens with simplified explanations",
-            "prevention": "Use respectful, age-appropriate language"
-          }
-        ]
-      },
-      
-      "responseAdjustment": {
-        "before": "You are not approaching this with the necessary depth and rigor.",
-        "after": "Let's deepen our approach and try again.",
-        "reasoning": "Shortened sentence, concrete language, removed abstract nouns (depth, rigor)"
-      }
-    }
-  ]
-}
-```
-
-- [ ] Middle Primary (8-9 years, Year 3-4)
-- [ ] Late Primary (10-11 years, Year 5-6)
-- [ ] Secondary (12-16 years, Year 7-11)
+**Tasks**:
+- [ ] Create Go client for CHISG API in `/backend/internal/integration/`
+- [ ] Define shared types between HumanOS and CHISG
+- [ ] Expand subject ontologies (GCSE Science, Math, English)
+- [ ] Integrate with HumanOS barrier detection
+- [ ] Combined endpoint: `/api/coach/respond`
+- [ ] Test latency < 200ms
 
 ## Phase 2: Product Development & Initial Revenue (Months 3-4)
 **Goal**: Launch GCSE Tool + Skills Tree Rising beta  
@@ -378,9 +127,7 @@ Create `/Users/michaelstewart/Coding/humanOS/shared/schemas/age_appropriateness.
 **New Work Needed**:
 - [ ] Week 1: Leadership skills taxonomy
   - [ ] Work with collaborators to define skills
-  - [ ] Map to progressio
-
-n levels (Foundation → Advanced)
+  - [ ] Map to progression levels (Foundation → Advanced)
   - [ ] Create assessment criteria per skill
 - [ ] Week 2: Progress reporting
   - [ ] Generate PDF reports for trainers

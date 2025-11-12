@@ -1,9 +1,14 @@
 {
+  "_id": "humanos_individual_barriers_v1",
+  "parentFramework": "humanos_etp_framework_v1",
+  "createdDate": "2025-11-10",
+  "purpose": "Detailed individual student barrier profiles for AI coach intervention selection",
+  
   "barriers": [
     {
       "id": "lack_of_motivation",
-      "name": "Lack of Motivation",
-      "category": "chronic",
+      "name": "Lack of Motivation / Won't Start",
+      "category": "initiation_barrier",
       "description": "Student shows consistent disengagement and minimal effort",
       "activatedETPs": ["comfort", "boredom", "avoidance"],
       "avoidanceTactics": [
@@ -41,8 +46,8 @@
     },
     {
       "id": "confrontational_showoff",
-      "name": "Confrontational Showoff Pattern",
-      "category": "chronic",
+      "name": "Confrontational / Showoff Pattern",
+      "category": "chronic_barrier",
       "description": "Student gains status by being confrontational and taking teachers to pieces",
       "activatedETPs": ["status", "entertainment", "belonging", "power"],
       "avoidanceTactics": [
@@ -80,8 +85,8 @@
     },
     {
       "id": "silent_avoider",
-      "name": "Silent Avoider (Hider)",
-      "category": "chronic",
+      "name": "Silent Avoider / Hider",
+      "category": "chronic_barrier",
       "description": "Student stays quiet and does nothing, hoping to be overlooked",
       "activatedETPs": ["fear", "shame", "safety_through_invisibility"],
       "avoidanceTactics": [
@@ -110,8 +115,8 @@
     },
     {
       "id": "quiet_playful_avoider",
-      "name": "Quiet Playful Avoider",
-      "category": "chronic",
+      "name": "Quiet Playful Avoider / Constant Play State",
+      "category": "maturity_barrier_or_trauma_response",
       "description": "Student prefers play and social interaction, quietly avoids work without confrontation",
       "activatedETPs": ["play", "social_connection", "comfort", "avoidance"],
       "avoidanceTactics": [
@@ -149,9 +154,9 @@
       ]
     },
     {
-      "id": "high_achiever",
-      "name": "High Achiever / Model Student",
-      "category": "acute",
+      "id": "high_achiever_underengaged",
+      "name": "High Achiever / Intrinsically Motivated but Underengaged",
+      "category": "enrichment_barrier",
       "description": "Student with strong home support and baseline motivation, but risks burnout",
       "activatedETPs": ["achievement", "status", "mastery", "pressure"],
       "avoidanceTactics": [

@@ -59,6 +59,7 @@ export interface InterventionLever {
 }
 
 export interface StudentBarrier {
+    id: string;
   name: string;
   category: BarrierCategory;
   activatedETPs: string[];
