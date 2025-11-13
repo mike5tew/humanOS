@@ -13,9 +13,9 @@ import (
 
 // Orchestrator coordinates all HumanOS components
 type Orchestrator struct {
-	barrierDetector *barriers.BarrierDetector
-	traumaDetector  *safeguarding.TraumaDetector
-	ageFilter       *barriers.AgeAppropriateness
+	BarrierDetector *barriers.BarrierDetector
+	TraumaDetector  *safeguarding.TraumaDetector
+	AgeFilter       *barriers.AgeAppropriateness
 }
 
 // CoachResponse is what gets sent back to frontend
@@ -47,9 +47,9 @@ func NewOrchestrator(barriersPath, traumaPath, agePath string) (*Orchestrator, e
 	}
 
 	return &Orchestrator{
-		barrierDetector: bd,
-		traumaDetector:  td,
-		ageFilter:       af,
+		BarrierDetector: bd,
+		TraumaDetector:  td,
+		AgeFilter:       af,
 	}, nil
 }
 
@@ -62,15 +62,20 @@ func (o *Orchestrator) ProcessMessage(
 
 	reasoning := []string{}
 
-	// STEP 1: Trauma/safeguarding check (HIGHEST PRIORITY) - NOW IN BACKEND
-	traumaResult := o.traumaDetector.Scan(message, context.Age)
-	if traumaResult.Severity >= 3 {
-		// Escalation already handled in trauma_detector
-		safeguardingMsg := o.ageFilter.SafeguardingResponse(context.Age)
-		reasoning = append(reasoning, "⚠️ Safeguarding concern - human team notified")
+	// STEP 1: Trauma/safeguarding check (HIGHEST PRIORITY)
+	traumaResult := o.TraumaDetector.Scan(message, context.Age)
+	if traumaResult.Detected && traumaResult.Severity >= 3 {
+		escalationMsg := o.TraumaDetector.GetEscalationMessage(traumaResult.Severity, context.Age)
+
+		reasoning = append(reasoning, fmt.Sprintf("🚨 SAFEGUARDING ALERT - Severity %d (%s)", traumaResult.Severity, traumaResult.Category))
+		reasoning = append(reasoning, traumaResult.Reasoning)
+		reasoning = append(reasoning, "⚠️ Human team notified for review")
+
+		// Log the incident for audit trail
+		_ = o.TraumaDetector.LogIncident(studentID, context.Age, message, traumaResult, escalationMsg)
 
 		return &CoachResponse{
-			Message:           safeguardingMsg,
+			Message:           escalationMsg,
 			SafeguardingAlert: true,
 			DetectedBarriers:  []string{},
 			Reasoning:         reasoning,
@@ -79,7 +84,7 @@ func (o *Orchestrator) ProcessMessage(
 	}
 
 	// STEP 2: Detect barriers
-	detectedBarriers := o.barrierDetector.DetectBarriers(message, context)
+	detectedBarriers := o.BarrierDetector.DetectBarriers(message, context)
 
 	if len(detectedBarriers) > 0 {
 		topBarrier := detectedBarriers[0]
@@ -100,10 +105,10 @@ func (o *Orchestrator) ProcessMessage(
 	rawResponse := o.generateResponse(intervention, context, detectedBarriers)
 
 	// STEP 5: Make response age-appropriate
-	finalResponse := o.ageFilter.AdjustLanguage(rawResponse, context.Age)
+	finalResponse := o.AgeFilter.AdjustLanguage(rawResponse, context.Age)
 
 	// STEP 6: Check for offense risk
-	offenseRisks := o.ageFilter.CheckOffenseRisk(finalResponse, context.Age)
+	offenseRisks := o.AgeFilter.CheckOffenseRisk(finalResponse, context.Age)
 	if len(offenseRisks) > 0 {
 		reasoning = append(reasoning, "⚠️ Regenerating safer response...")
 		finalResponse = o.regenerateSafeResponse(context, intervention)
@@ -308,4 +313,13 @@ func extractBarrierNames(barriers []barriers.DetectedBarrier) []string {
 		names[i] = b.Barrier.Name
 	}
 	return names
+}
+
+// Public wrapper methods for testing
+func (o *Orchestrator) AdjustLanguage(response string, age int) string {
+	return o.AgeFilter.AdjustLanguage(response, age)
+}
+
+func (o *Orchestrator) CheckOffenseRisk(response string, age int) []string {
+	return o.AgeFilter.CheckOffenseRisk(response, age)
 }

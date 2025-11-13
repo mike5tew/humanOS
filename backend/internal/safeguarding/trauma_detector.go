@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
+	"time"
 )
 
 // TraumaDetector analyzes student input for safeguarding concerns
@@ -32,6 +33,7 @@ type TraumaResult struct {
 	Severity  int
 	Category  string
 	Reasoning string
+	Timestamp time.Time
 }
 
 // SafeguardingAlert sent to human team
@@ -43,6 +45,18 @@ type SafeguardingAlert struct {
 	Content   string `json:"content"`
 	Urgent    bool   `json:"urgent"`
 	Response  string `json:"response"`
+}
+
+// SafeguardingLog stores incident for human review
+type SafeguardingLog struct {
+	Timestamp   time.Time
+	StudentID   string
+	Age         int
+	Message     string
+	Severity    int
+	Category    string
+	Response    string
+	HumanReview bool
 }
 
 // NewTraumaDetector loads trauma patterns from JSON
@@ -111,6 +125,7 @@ func (td *TraumaDetector) Scan(message string, age int) TraumaResult {
 					Severity:  severity,
 					Category:  pattern.Category,
 					Reasoning: pattern.Description,
+					Timestamp: time.Now(),
 				}
 
 				// Escalate based on severity
@@ -124,8 +139,9 @@ func (td *TraumaDetector) Scan(message string, age int) TraumaResult {
 	}
 
 	return TraumaResult{
-		Detected: false,
-		Severity: 0,
+		Detected:  false,
+		Severity:  0,
+		Timestamp: time.Now(),
 	}
 }
 
@@ -138,12 +154,7 @@ func (td *TraumaDetector) calibrateSeverity(baseSeverity int, age int, category 
 		}
 	}
 
-	// Teenagers: may have different context
-	if age >= 14 && category == "violence" {
-		// Check if potentially joking/gaming reference
-		// For now, keep same severity
-	}
-
+	// No adjustment for older ages - they have more context
 	return baseSeverity
 }
 
@@ -212,6 +223,45 @@ func (td *TraumaDetector) generateSafeguardingResponse(severity int) string {
 	return "I hear you. Let's take a break and get some support."
 }
 
+// GetEscalationMessage returns appropriate response based on severity
+func (td *TraumaDetector) GetEscalationMessage(severity int, age int) string {
+	if severity >= 4 {
+		if age < 10 {
+			return "I'm very concerned about what you've shared. Let's get a trusted adult right now - a teacher, parent, or counselor. Your safety is the most important thing."
+		} else if age < 13 {
+			return "I'm very concerned about what you've shared. Your safety is the most important thing right now. I'm going to make sure you talk with someone who can help immediately - like a school counselor, trusted teacher, or parent."
+		} else {
+			return "I'm very concerned about what you've shared. Your safety is the most important thing. I'm connecting you with someone trained to help - please reach out to a trusted adult, counselor, or contact a crisis helpline immediately."
+		}
+	}
+
+	if severity >= 3 {
+		if age < 10 {
+			return "I think it would be really helpful for you to talk with a trusted adult about this - like a teacher or parent. They can help you better than I can."
+		} else if age < 13 {
+			return "I think it would be really helpful for you to talk with someone who can support you better, like a school counselor, teacher, or parent. I'm going to let them know you need to talk."
+		} else {
+			return "I think it would be helpful to talk with a trusted adult or counselor about this. Your wellbeing is important. Please reach out to a school counselor, trusted teacher, parent, or contact a crisis helpline if you need immediate help."
+		}
+	}
+
+	return "Let's take a break from the work for now. I want to make sure you get some support."
+}
+
+// LogIncident creates audit trail for safeguarding concern
+func (td *TraumaDetector) LogIncident(studentID string, age int, message string, result TraumaResult, aiResponse string) SafeguardingLog {
+	return SafeguardingLog{
+		Timestamp:   result.Timestamp,
+		StudentID:   studentID,
+		Age:         age,
+		Message:     message,
+		Severity:    result.Severity,
+		Category:    result.Category,
+		Response:    aiResponse,
+		HumanReview: result.Severity >= 3,
+	}
+}
+
 // Helper functions
 func truncateContent(s string) string {
 	if len(s) > 200 {
@@ -222,5 +272,5 @@ func truncateContent(s string) string {
 
 func getCurrentTimestamp() int64 {
 	// Return current Unix timestamp
-	return 0 // Placeholder
+	return time.Now().Unix()
 }

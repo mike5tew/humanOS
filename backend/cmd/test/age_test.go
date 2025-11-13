@@ -1,5 +1,4 @@
 package main
-package main
 
 import (
 	"fmt"
@@ -37,16 +36,16 @@ func testAgeAppropriate() {
 		},
 	}
 
-	fmt.Println("\n🔍 AGE APPROPRIATENESS TEST\n")
+	fmt.Println("🔍 AGE APPROPRIATENESS TEST")
 
 	for i, tc := range testCases {
-		fmt.Printf("Test %d (Age %d):\n", i+1, tc.Age)
+		fmt.Printf("Test %d (Age %d):\n", i+1, tc.age)
 		fmt.Printf("  Original: %s\n", tc.response)
 
-		adjusted := af.AdjustLanguage(tc.response, tc.Age)
+		adjusted := af.AdjustLanguage(tc.response, tc.age)
 		fmt.Printf("  Adjusted: %s\n", adjusted)
 
-		risks := af.CheckOffenseRisk(adjusted, tc.Age)
+		risks := af.CheckOffenseRisk(adjusted, tc.age)
 		if len(risks) > 0 {
 			fmt.Printf("  ⚠️  Risks detected:\n")
 			for _, risk := range risks {

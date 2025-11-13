@@ -18,18 +18,18 @@ type RoutineProfile struct {
 	FenceVoltage      float64 `json:"fence_voltage"`      // Pain level when routine is disrupted
 }
 
-// BrainState represents primal/emotional/rational levels
+// BrainState represents the current cognitive state
 type BrainState struct {
-	PrimalLevel    float64 `json:"primal_level"`    // 0-1: Physical needs (hunger, tiredness)
-	EmotionalLevel float64 `json:"emotional_level"` // 0-1: Fear, frustration, overwhelm
-	RationalLevel  float64 `json:"rational_level"`  // 0-1: Cortical thinking capacity
-	OverrideRisk   float64 `json:"override_risk"`   // 0-1: Risk of brain stem takeover
+	PrimalLevel    float64 `json:"primal_level"`    // 0-1: survival/basic needs activation
+	EmotionalLevel float64 `json:"emotional_level"` // 0-1: limbic/emotional system activation
+	RationalLevel  float64 `json:"rational_level"`  // 0-1: prefrontal cortex engagement
+	CurrentMode    string  `json:"current_mode"`    // "primal" | "emotional" | "rational"
 }
 
-// ETP represents an Emotional Trigger Point
+// ETP represents an Evolutionary Trigger Profile
 type ETP struct {
 	Name      string  `json:"name"`
-	Category  string  `json:"category"`  // pain, pleasure, social, goal
+	Category  string  `json:"category"`  // "pain" | "pleasure" | "social" | "goal"
 	Intensity float64 `json:"intensity"` // 0-1
 }
 
@@ -40,23 +40,18 @@ type StudentContext struct {
 	BrainState         BrainState     `json:"brain_state"`
 	ActivatedETPs      []ETP          `json:"activated_etps"`
 	RoutineProfile     RoutineProfile `json:"routine_profile"`
-	SocialNeed         float64        `json:"social_need"`
-	AutonomyResistance float64        `json:"autonomy_resistance"`
-	StatusSeeking      float64        `json:"status_seeking"`
+	SocialNeed         float64        `json:"social_need"`         // 0-1
+	AutonomyResistance float64        `json:"autonomy_resistance"` // 0-1
+	StatusSeeking      float64        `json:"status_seeking"`      // 0-1
 }
 
-// InterventionLever represents a specific intervention strategy
+// InterventionLever represents a strategy to address barriers
 type InterventionLever struct {
 	Name             string   `json:"name"`
 	Description      string   `json:"description"`
 	Steps            []string `json:"steps"`
-	Prerequisites    []string `json:"prerequisites,omitempty"`
-	Benefits         []string `json:"benefits,omitempty"`
 	ETPReduction     []string `json:"etp_reduction"`
 	BrainStateTarget string   `json:"brain_state_target"`
-	WhenToUse        []string `json:"when_to_use,omitempty"`
-	TimeInvestment   string   `json:"time_investment,omitempty"`
-	ExpectedTimeline string   `json:"expected_timeline,omitempty"`
 }
 
 // BarrierCategory classifies barrier types
@@ -69,7 +64,7 @@ const (
 	EnrichmentBarrier BarrierCategory = "enrichment"
 )
 
-// StudentBarrier represents a learning obstacle
+// StudentBarrier represents an identified learning barrier
 type StudentBarrier struct {
 	ID               string              `json:"id"` // REQUIRED: unique identifier for barrier matching
 	Name             string              `json:"name"`
