@@ -290,10 +290,66 @@ services:
       - frontend-network
     restart: unless-stopped
 
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: humanos-api
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - BARRIERS_PATH=./shared/schemas/barriers.json
+      - TRAUMA_PATH=./shared/schemas/trauma_detection.json
+      - AGE_PATH=./shared/schemas/age_appropriateness.json
+    volumes:
+      # Mount schemas for live updates (optional)
+      - ./shared/schemas:/app/shared/schemas:ro
+    networks:
+      - humanos-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Frontend (Development with live reload)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: humanos-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8080
+    volumes:
+      # Mount source code for live reload
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - ./frontend/index.html:/app/index.html
+      - ./frontend/vite.config.ts:/app/vite.config.ts
+      - ./frontend/tsconfig.json:/app/tsconfig.json
+      # Exclude node_modules from mount
+      - /app/node_modules
+    networks:
+      - humanos-network
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5173"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
 networks:
   frontend-network:
     driver: bridge
   backend-network:
+    driver: bridge
+  humanos-network:
     driver: bridge
 
 volumes:

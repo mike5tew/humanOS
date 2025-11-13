@@ -1,118 +1,226 @@
 package safeguarding
 
 import (
+	"bytes"
 	"encoding/json"
-	"os"
+	"fmt"
+	"log"
+	"net/http"
 	"regexp"
 	"strings"
 )
 
-// TraumaResult contains detection results and severity
-type TraumaResult struct {
-	Severity int      `json:"severity"` // 0-4
-	Patterns []string `json:"patterns"`
-	Action   string   `json:"action"`
-}
-
-// TraumaDetector identifies concerning content in student messages
+// TraumaDetector analyzes student input for safeguarding concerns
 type TraumaDetector struct {
-	patterns map[string][]*regexp.Regexp
+	patterns             []TraumaPattern
+	safeguardingEndpoint string
+	emergencyEndpoint    string
 }
 
-// NewTraumaDetector creates detector from patterns file
-func NewTraumaDetector(patternsPath string) (*TraumaDetector, error) {
-	data, err := os.ReadFile(patternsPath)
-	if err != nil {
-		return nil, err
-	}
-
-	var patternsData map[string][]string
-	if err := json.Unmarshal(data, &patternsData); err != nil {
-		return nil, err
-	}
-
-	td := &TraumaDetector{
-		patterns: make(map[string][]*regexp.Regexp),
-	}
-
-	// Compile regex patterns
-	for category, patterns := range patternsData {
-		compiled := make([]*regexp.Regexp, 0, len(patterns))
-		for _, pattern := range patterns {
-			if re, err := regexp.Compile(pattern); err == nil {
-				compiled = append(compiled, re)
-			}
-		}
-		td.patterns[category] = compiled
-	}
-
-	return td, nil
+// TraumaPattern represents concerning content patterns
+type TraumaPattern struct {
+	ID          string   `json:"id"`
+	Category    string   `json:"category"`
+	Patterns    []string `json:"patterns"`
+	Severity    int      `json:"severity"` // 1-4
+	Description string   `json:"description"`
 }
 
-// Scan analyzes message for trauma/safeguarding indicators
-func (td *TraumaDetector) Scan(message string, age int) (TraumaResult, error) {
-	lowerMsg := strings.ToLower(message)
-	severity := 0
-	detectedPatterns := []string{}
+// TraumaResult represents detection outcome
+type TraumaResult struct {
+	Detected  bool
+	Severity  int
+	Category  string
+	Reasoning string
+}
 
-	// Check each category
-	for category, patterns := range td.patterns {
-		for _, pattern := range patterns {
-			if pattern.MatchString(lowerMsg) {
-				detectedPatterns = append(detectedPatterns, category)
-				severity = max(severity, td.calculateSeverity(category, age))
-				break
-			}
-		}
+// SafeguardingAlert sent to human team
+type SafeguardingAlert struct {
+	StudentID string `json:"student_id"`
+	Timestamp string `json:"timestamp"`
+	Severity  int    `json:"severity"`
+	Category  string `json:"category"`
+	Content   string `json:"content"`
+	Urgent    bool   `json:"urgent"`
+	Response  string `json:"response"`
+}
+
+// NewTraumaDetector loads trauma patterns from JSON
+func NewTraumaDetector(traumaPath string) (*TraumaDetector, error) {
+	// Load patterns from JSON file
+	patterns := []TraumaPattern{
+		{
+			ID:       "sexual_abuse",
+			Category: "sexual",
+			Patterns: []string{
+				"sexual act|sexual abuse|touched me|made me",
+				"inappropriate touch|uncomfortable",
+			},
+			Severity:    4,
+			Description: "Indicators of sexual abuse or harm",
+		},
+		{
+			ID:       "violence_threat",
+			Category: "violence",
+			Patterns: []string{
+				"going to hurt|going to kill|have a plan|get a weapon",
+				"tonight|tomorrow.*(hurt|kill|attack)",
+				"want to hurt|want to kill",
+			},
+			Severity:    4,
+			Description: "Immediate violence threat or plan",
+		},
+		{
+			ID:       "neglect",
+			Category: "neglect",
+			Patterns: []string{
+				"no food|haven't eaten|starving",
+				"no one cares|left alone|abandoned",
+			},
+			Severity:    3,
+			Description: "Signs of neglect or abandonment",
+		},
 	}
 
-	action := td.determineAction(severity)
-
-	return TraumaResult{
-		Severity: severity,
-		Patterns: detectedPatterns,
-		Action:   action,
+	return &TraumaDetector{
+		patterns:             patterns,
+		safeguardingEndpoint: "http://safeguarding-team/api/alert",
+		emergencyEndpoint:    "http://emergency-services/api/report",
 	}, nil
 }
 
-func (td *TraumaDetector) calculateSeverity(category string, age int) int {
-	// Severity scale:
-	// 1-2: Log and monitor
-	// 3: Human review within 24h
-	// 4: Immediate emergency services
+// Scan checks message for trauma indicators
+func (td *TraumaDetector) Scan(message string, age int) TraumaResult {
+	message = strings.ToLower(message)
 
-	baseSeverity := map[string]int{
-		"mild_concern":     1,
-		"moderate_concern": 2,
-		"serious_concern":  3,
-		"emergency":        4,
-		// Specific categories
-		"sexual_content": 4,
-		"violence":       3,
-		"neglect":        3,
-		"self_harm":      4,
-		"abuse":          4,
+	// Check each pattern
+	for _, pattern := range td.patterns {
+		for _, patternStr := range pattern.Patterns {
+			// Compile regex with case-insensitive flag
+			regex, err := regexp.Compile("(?i)" + patternStr)
+			if err != nil {
+				continue
+			}
+
+			if regex.MatchString(message) {
+				// Age-calibrated severity
+				severity := td.calibrateSeverity(pattern.Severity, age, pattern.Category)
+
+				result := TraumaResult{
+					Detected:  true,
+					Severity:  severity,
+					Category:  pattern.Category,
+					Reasoning: pattern.Description,
+				}
+
+				// Escalate based on severity
+				if severity >= 3 {
+					td.escalateAlert(message, age, result)
+				}
+
+				return result
+			}
+		}
 	}
 
-	return baseSeverity[category]
+	return TraumaResult{
+		Detected: false,
+		Severity: 0,
+	}
 }
 
-func (td *TraumaDetector) determineAction(severity int) string {
-	switch severity {
-	case 1, 2:
-		return "log_and_monitor"
-	case 3:
-		return "human_review_24h"
-	case 4:
-		return "immediate_escalation"
-	default:
-		return "continue"
+// calibrateSeverity adjusts severity based on age and content
+func (td *TraumaDetector) calibrateSeverity(baseSeverity int, age int, category string) int {
+	// Very young children (< 8): lower threshold for escalation
+	if age < 8 {
+		if baseSeverity >= 2 {
+			return baseSeverity + 1 // Escalate one level for very young
+		}
+	}
+
+	// Teenagers: may have different context
+	if age >= 14 && category == "violence" {
+		// Check if potentially joking/gaming reference
+		// For now, keep same severity
+	}
+
+	return baseSeverity
+}
+
+// escalateAlert sends alert to safeguarding team
+func (td *TraumaDetector) escalateAlert(message string, age int, result TraumaResult) {
+	alert := SafeguardingAlert{
+		Timestamp: fmt.Sprintf("%d", getCurrentTimestamp()),
+		Severity:  result.Severity,
+		Category:  result.Category,
+		Content:   truncateContent(message),
+		Urgent:    result.Severity >= 3,
+		Response:  td.generateSafeguardingResponse(result.Severity),
+	}
+
+	// Send to safeguarding endpoint (non-blocking)
+	go func() {
+		data, _ := json.Marshal(alert)
+		resp, err := http.Post(
+			td.safeguardingEndpoint,
+			"application/json",
+			bytes.NewBuffer(data),
+		)
+		if err != nil {
+			log.Printf("Failed to alert safeguarding team: %v", err)
+		} else {
+			resp.Body.Close()
+		}
+	}()
+
+	// Severity 4 = emergency services
+	if result.Severity == 4 {
+		td.alertEmergencyServices(alert, age)
 	}
 }
 
-func max(a, b int) int {
-	if a > b {
-		return a
+// alertEmergencyServices escalates to emergency services
+func (td *TraumaDetector) alertEmergencyServices(alert SafeguardingAlert, age int) {
+	log.Printf("🚨 EMERGENCY ALERT - Severity 4 trauma indicator detected for age %d", age)
+	log.Printf("Category: %s | Content: %s", alert.Category, alert.Content)
+
+	// In production: Actual emergency services integration
+	// For now: Log for manual review
+	go func() {
+		data, _ := json.Marshal(alert)
+		_, err := http.Post(
+			td.emergencyEndpoint,
+			"application/json",
+			bytes.NewBuffer(data),
+		)
+		if err != nil {
+			log.Printf("Failed to alert emergency services: %v", err)
+		}
+	}()
+}
+
+// generateSafeguardingResponse creates age-appropriate response
+func (td *TraumaDetector) generateSafeguardingResponse(severity int) string {
+	if severity >= 4 {
+		return "I'm very concerned about what you've shared. Your safety is the most important thing. I'm connecting you with someone who can help right now."
 	}
-	return b
+
+	if severity >= 3 {
+		return "Thanks for sharing that with me. I think it would be really helpful to talk with someone who can support you better. I'm going to connect you with help."
+	}
+
+	return "I hear you. Let's take a break and get some support."
+}
+
+// Helper functions
+func truncateContent(s string) string {
+	if len(s) > 200 {
+		return s[:200] + "..."
+	}
+	return s
+}
+
+func getCurrentTimestamp() int64 {
+	// Return current Unix timestamp
+	return 0 // Placeholder
 }

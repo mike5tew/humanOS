@@ -4,193 +4,1444 @@
   "createdDate": "2025-11-10",
   "purpose": "Detailed individual student barrier profiles for AI coach intervention selection",
   
+  "fundamentalPrinciple": {
+    "statement": "You don't know what anyone is capable of until they are trying their best",
+    "implication": "Cannot assess true capability from avoidance behaviors",
+    "corollary": "First priority is getting genuine effort, then assess ability"
+  },
+  
   "barriers": [
     {
       "id": "lack_of_motivation",
       "name": "Lack of Motivation / Won't Start",
       "category": "initiation_barrier",
-      "description": "Student shows consistent disengagement and minimal effort",
-      "activatedETPs": ["comfort", "boredom", "avoidance"],
-      "avoidanceTactics": [
-        "i_dont_know",
-        "minimal_effort",
-        "waiting_for_instructions",
-        "distraction_seeking"
-      ],
-      "effectiveLevers": [
-        {
-          "name": "game_reward_system",
-          "description": "5-minute game access after task completion",
-          "steps": [
-            "Define clear micro-goals",
-            "Offer game reward immediately after completion",
-            "Gradually extend work duration required",
-            "Transition to intrinsic motivation"
-          ],
-          "etpReduction": ["boredom", "frustration"],
-          "brainStateTarget": "trigger_reward_seeking"
+      
+      "manifestations": {
+        "observable": [
+          "Staring at blank page",
+          "Not picking up pen/starting typing",
+          "Waiting for others to start",
+          "Avoiding eye contact when task given",
+          "Physical stillness or distraction seeking"
+        ],
+        "verbal": [
+          "I don't know how to start",
+          "This is boring",
+          "What's the point?",
+          "Can I do this later?"
+        ]
+      },
+      
+      "underlyingCauses": {
+        "primary": "No entry point visible - task feels overwhelming or pointless",
+        "secondary": [
+          "Fear of starting wrong",
+          "No clear first step",
+          "No personal relevance perceived",
+          "Success feels impossible"
+        ],
+        "etpActivation": [
+          "threat_avoidance (failure risk)",
+          "shame (looking stupid)",
+          "control_need (no agency in task)",
+          "belonging (peer comparison fear)"
+        ]
+      },
+      
+      "interventionStrategy": {
+        "phase1_immediateEngagement": {
+          "name": "Game-Access Incentive",
+          "implementation": {
+            "offer": "Get this done and you get to play on one of the games",
+            "duration": "5 minutes game access",
+            "condition": "Task completion (not perfection)",
+            "digitalEquivalent": "Generate time-limited unlock code"
+          },
+          "purpose": "Create immediate starting momentum",
+          "rationale": "Extrinsic motivation gets them moving when intrinsic is absent",
+          "transitionGoal": "Build success experience to enable intrinsic shift"
         },
-        {
-          "name": "ban_i_dont_know",
-          "description": "Block the primary avoidance phrase",
-          "steps": [
-            "Explain that 'I don't know' is not acceptable",
-            "Provide thinking prompts instead",
-            "Frame as 'What do you think?' or 'Make a guess'",
-            "Celebrate attempts even if wrong"
-          ],
-          "etpReduction": ["avoidance", "fear"],
-          "brainStateTarget": "force_engagement"
+        
+        "phase2_avoidancePrevention": {
+          "name": "Ban 'I Don't Know' Responses",
+          "implementation": {
+            "rule": "'I don't know' is not an acceptable answer",
+            "replacement": "You must attempt something, even if unsure",
+            "framing": "Trying and being wrong teaches more than not trying",
+            "consequence": "Sitting in discomfort until attempt made"
+          },
+          "purpose": "Eliminate primary avoidance tactic",
+          "rationale": "'I don't know' is a huge avoidance tactic that prevents any learning",
+          "keyPhrase": "I need to see what you think, even if you're not sure"
+        },
+        
+        "phase3_copyingPrevention": {
+          "name": "Differentiated Questions",
+          "implementation": {
+            "approach": "Make questions different for each student",
+            "variation": "Same concept, different numbers/contexts/examples",
+            "purpose": "Eliminate copying opportunities",
+            "benefit": "Forces individual thinking, reveals actual understanding"
+          },
+          "rationale": "Can't assess capability when they're copying",
+          "keyInsight": "Copying is another avoidance of genuine effort"
+        },
+        
+        "phase4_successExperience": {
+          "name": "Micro-Success Generation",
+          "implementation": {
+            "startPoint": "Get work done - any work, not perfect work",
+            "celebrate": "Completion, not correctness (initially)",
+            "buildMomentum": "One success → next task feels possible",
+            "gradualRaise": "Slowly increase expectations as confidence builds"
+          },
+          "purpose": "Create capability-revealing effort",
+          "rationale": "Success experience makes next attempt less threatening"
         }
-      ]
+      },
+      
+      "aiCoachImplementation": {
+        "detectionSignals": [
+          "User hasn't started after prompt",
+          "User responds with 'I don't know'",
+          "User asks for answer directly",
+          "User provides extremely minimal response",
+          "User requests task delay"
+        ],
+        
+        "responseSequence": [
+          {
+            "step": 1,
+            "action": "Offer game-access reward",
+            "message": "Complete this task and you'll get 5 minutes of game access. Just need to see you try, doesn't have to be perfect.",
+            "expectedOutcome": "Initial engagement"
+          },
+          {
+            "step": 2,
+            "action": "Block 'I don't know' avoidance",
+            "message": "'I don't know' isn't an option here. Give me your best guess - even if you think it's wrong. Trying teaches you more than avoiding.",
+            "expectedOutcome": "Attempt generation"
+          },
+          {
+            "step": 3,
+            "action": "Provide differentiated task variation",
+            "message": "Here's the same concept with different numbers/context. This way I can see YOUR thinking, not copied work.",
+            "expectedOutcome": "Individual effort"
+          },
+          {
+            "step": 4,
+            "action": "Celebrate genuine attempt",
+            "message": "That's what I needed to see - you trying. Now we know where you actually are, and we can work from there.",
+            "expectedOutcome": "Success experience, capability revealed"
+          }
+        ],
+        
+        "rewardGeneration": {
+          "trigger": "Task completion (not correctness)",
+          "code": "generateTimeLimitedUnlock(5 minutes)",
+          "trackUsage": true,
+          "transitionMonitoring": "Track ratio of reward-triggered vs self-initiated work"
+        }
+      },
+      
+      "progressIndicators": {
+        "early": [
+          "Starts task after reward offer",
+          "Makes attempt (even if incorrect)",
+          "Completes basic version of task"
+        ],
+        "developing": [
+          "Starts without immediate reward mention",
+          "Attempts without 'I don't know' prompt",
+          "Shows improvement in attempt quality"
+        ],
+        "established": [
+          "Self-initiates work",
+          "Asks clarifying questions instead of avoiding",
+          "Reward becomes less necessary"
+        ]
+      },
+      
+      "commonPitfalls": {
+        "rewardDependency": {
+          "risk": "Student only works for game access",
+          "mitigation": "Gradually increase work required per reward",
+          "transition": "Introduce intrinsic motivators (curiosity, competence, mastery)"
+        },
+        "tokenEffort": {
+          "risk": "Student does minimal work to get reward",
+          "mitigation": "Explicitly define completion criteria",
+          "response": "Incomplete work = no reward, must try again"
+        },
+        "shamingBackfire": {
+          "risk": "Blocking 'I don't know' feels like attack",
+          "mitigation": "Frame as 'I need to see your thinking' not 'you're avoiding'",
+          "tone": "Supportive expectation, not criticism"
+        }
+      },
+      
+      "timelineExpectation": {
+        "initialEngagement": "First session - reward gets them started",
+        "habitFormation": "2-4 weeks of consistent reward-effort pairing",
+        "transitionBegin": "4-8 weeks - occasional self-initiated work",
+        "intrinsicEmergence": "2-6 months - reward becomes supplemental, not primary driver"
+      }
     },
+    
     {
       "id": "confrontational_showoff",
       "name": "Confrontational / Showoff Pattern",
       "category": "chronic_barrier",
-      "description": "Student gains status by being confrontational and taking teachers to pieces",
-      "activatedETPs": ["status", "entertainment", "belonging", "power"],
-      "avoidanceTactics": [
-        "straight_up_confrontational",
-        "deliberately_obnoxious",
-        "blank_you_completely",
-        "perform_for_peer_audience"
-      ],
-      "effectiveLevers": [
-        {
-          "name": "micro_goal_celebration",
-          "description": "Every small goal is a victory - lower bar to ground level",
-          "steps": [
-            "Find ANY tiny thing to recognize",
-            "Pile on praise disproportionately",
-            "Write one word → celebrate",
-            "Stay in room → acknowledge"
-          ],
-          "etpReduction": ["defiance", "shame"],
-          "brainStateTarget": "build_positive_association"
+      
+      "manifestations": {
+        "observable": [
+          "Deliberately obnoxious behavior",
+          "Confrontational responses to requests",
+          "Performing resistance for peer audience",
+          "Blank refusal to engage",
+          "Taking teachers to pieces as entertainment"
+        ],
+        "verbal": [
+          "This is stupid",
+          "Why should I?",
+          "Make me",
+          "I'm not doing this",
+          "Outright confrontational statements"
+        ]
+      },
+      
+      "underlyingCauses": {
+        "primary": "This is the way to fill your day - status comes from 'taking teachers to pieces'",
+        "secondary": [
+          "Peer status maintenance through resistance",
+          "Entertainment value of confrontation",
+          "Learned behavior pattern (worked before)",
+          "Identity tied to 'rebel' role"
+        ],
+        "etpActivation": [
+          "status (among peers)",
+          "entertainment (boredom filling)",
+          "belonging (to peer group that values this)",
+          "power (control through resistance)",
+          "autonomy (refusing external control)"
+        ]
+      },
+      
+      "interventionStrategy": {
+        "phase1_tinyVictories": {
+          "name": "Every Small Goal is a Victory",
+          "implementation": {
+            "startPoint": "Lower bar to ground level",
+            "examples": [
+              "Write your name → celebrate",
+              "Make eye contact → acknowledge",
+              "Stay in room for lesson → praise",
+              "Write one word → recognize"
+            ],
+            "principle": "Find ANYTHING to positively recognize",
+            "intensity": "Pile on praise disproportionately"
+          },
+          "purpose": "Establish that engagement = positive response, not punishment",
+          "rationale": "Every small goal is a victory when starting from confrontation"
         },
-        {
-          "name": "non_work_relationship",
-          "description": "Chat is not all about work - build human connection",
-          "steps": [
-            "Show interest in their life outside class",
-            "Talk about their interests and hobbies",
-            "Build trust through non-academic conversation",
-            "Create safe relationship space"
-          ],
-          "etpReduction": ["rejection", "threat_avoidance"],
-          "brainStateTarget": "lower_emotional_voltage"
+        
+        "phase2_audienceRemoval": {
+          "name": "Work on People Around Them",
+          "implementation": {
+            "approach": "Remove peer audience that reinforces behavior",
+            "methods": [
+              "Separate from enablers/amplifiers",
+              "One-on-one interaction when possible",
+              "Different grouping structures",
+              "Break peer reinforcement loop"
+            ]
+          },
+          "purpose": "Eliminate performance motivation",
+          "rationale": "Showoff behavior requires audience"
+        },
+        
+        "phase3_relationshipBuild": {
+          "name": "Chat is Not All About Work",
+          "implementation": {
+            "approach": "Show interest in them as person, not just student",
+            "topics": [
+              "Their interests, hobbies, life outside school",
+              "What they care about",
+              "Their world, their perspective"
+            ],
+            "ratio": "Non-work chat should significantly balance work requests",
+            "purpose": "Build human connection, not just teacher-student transaction"
+          },
+          "rationale": "Relationship creates foundation for influence"
+        },
+        
+        "phase4_patternAwareness": {
+          "name": "Pattern Discussion (No Moral Judgment)",
+          "implementation": {
+            "timing": "Occasionally, when relationship established",
+            "framing": [
+              "Let's talk about patterns of what happens",
+              "Why this is harming you (not 'you're bad')",
+              "How we can try to fix it (collaborative)",
+              "This pattern isn't working for you"
+            ],
+            "avoid": "Good/bad moral framework - not valid descriptions in this context",
+            "focus": "Practical consequences, problem-solving"
+          },
+          "purpose": "Develop self-awareness without shame",
+          "rationale": "Understanding pattern ≠ judging person"
         }
-      ]
+      },
+      
+      "aiCoachImplementation": {
+        "detectionSignals": [
+          "Dismissive or confrontational language",
+          "Refusal statements",
+          "Performing resistance (attention-seeking phrasing)",
+          "Deliberate button-pushing",
+          "Escalating confrontation attempts"
+        ],
+        
+        "responseProtocol": {
+          "avoid": [
+            "Confrontational responses",
+            "Moral judgment ('that's bad behavior')",
+            "Power struggles",
+            "Defensive reactions"
+          ],
+          "implement": [
+            "Find smallest possible engagement point",
+            "Acknowledge without reinforcing",
+            "Redirect to micro-goal",
+            "Celebrate tiniest attempt"
+          ]
+        },
+        
+        "exampleInteraction": {
+          "student": "This is stupid, I'm not doing this",
+          "aiResponse": "Okay, I hear you're not feeling it. Let me know when you're ready to try just one small part. Even just reading the first question would be a start.",
+          "rationale": "Not taking bait, offering micro-entry point, no power struggle"
+        }
+      },
+      
+      "progressIndicators": {
+        "early": [
+          "Stays in conversation (doesn't disengage completely)",
+          "Attempts one micro-task",
+          "Reduces confrontational intensity"
+        ],
+        "developing": [
+          "Initiates non-work conversation with AI",
+          "Attempts tasks without extensive resistance",
+          "Asks genuine questions occasionally"
+        ],
+        "established": [
+          "Engages willingly most of the time",
+          "Sees AI as ally, not adversary",
+          "Pattern awareness emerging"
+        ]
+      },
+      
+      "timelineExpectation": {
+        "initial": "Months of micro-victories",
+        "relationship": "3-6 months to build trust",
+        "pattern_shift": "6-12 months to see consistent change",
+        "reality": "Not linear - setbacks expected"
+      }
     },
+    
     {
       "id": "silent_avoider",
       "name": "Silent Avoider / Hider",
       "category": "chronic_barrier",
-      "description": "Student stays quiet and does nothing, hoping to be overlooked",
-      "activatedETPs": ["fear", "shame", "safety_through_invisibility"],
-      "avoidanceTactics": [
-        "stay_quiet_dont_work",
-        "avoid_eye_contact",
-        "minimal_response",
-        "waiting_to_be_forgotten"
-      ],
-      "effectiveLevers": [
-        {
-          "name": "shoulder_sitting_intensive_support",
-          "description": "Massive time investment with constant proximity",
-          "steps": [
-            "Sit metaphorically on their shoulder",
-            "Start with tiniest tasks: 'Write your name'",
-            "Celebrate micro-progress molecule by molecule",
-            "Never give up, never move on to avoid pain",
-            "Accept months-to-years timeline"
-          ],
-          "etpReduction": ["fear", "shame", "abandonment"],
-          "brainStateTarget": "build_confidence_molecule_by_molecule",
-          "timeInvestment": "10+ hours per week per student",
-          "expectedTimeline": "months to years"
+      
+      "manifestations": {
+        "observable": [
+          "Stays very quiet",
+          "Doesn't do work but doesn't disrupt",
+          "Blends into background",
+          "Minimal participation",
+          "Extreme fear of being wrong"
+        ],
+        "verbal": [
+          "Very little speech",
+          "One-word answers",
+          "Deflection when asked questions",
+          "Soft 'I don't know' responses"
+        ]
+      },
+      
+      "underlyingCauses": {
+        "primary": "Fear of failure/exposure - staying quiet = staying safe",
+        "secondary": [
+          "Severe confidence deficit",
+          "Learned helplessness",
+          "Prior negative experiences with being wrong",
+          "Extreme threat avoidance"
+        ],
+        "etpActivation": [
+          "fear (of failure, judgment)",
+          "shame (being exposed as incapable)",
+          "safety (quiet = invisible = safe)",
+          "threat_avoidance (attempting = risk)"
+        ]
+      },
+      
+      "interventionStrategy": {
+        "phase1_proximitySupport": {
+          "name": "Shoulder Sitting (Intensive Proximity)",
+          "implementation": {
+            "approach": "Constant nearby presence",
+            "intensity": "10+ hours per week per student",
+            "method": "Physical/virtual proximity, frequent check-ins",
+            "purpose": "Cannot avoid when teacher is right there"
+          },
+          "rationale": "Hiders succeed through invisibility - proximity defeats this"
+        },
+        
+        "phase2_microTaskInitiation": {
+          "name": "Tiniest Possible Tasks",
+          "implementation": {
+            "examples": [
+              "Write your name",
+              "Copy one word",
+              "Circle one answer",
+              "Point to something on page"
+            ],
+            "principle": "Lower bar until it's impossible to fail",
+            "celebration": "Celebrate molecule-level progress"
+          },
+          "purpose": "Create guaranteed success experiences",
+          "rationale": "Build confidence literally one molecule at a time"
+        },
+        
+        "phase3_confidenceMoleculeBuilding": {
+          "name": "Incremental Capability Expansion",
+          "implementation": {
+            "progression": "One word → One sentence → One paragraph",
+            "pacing": "Weeks per increment",
+            "validation": "Constant positive reinforcement",
+            "patience": "Accept glacial progress pace"
+          },
+          "purpose": "Slowly expand what feels possible",
+          "rationale": "Can't rush confidence building"
+        },
+        
+        "phase4_painAcceptance": {
+          "name": "Teacher Persistence Despite Pain",
+          "implementation": {
+            "reality": "This is painful, slow, frustrating work",
+            "commitment": "Accept pain, don't move on",
+            "message": "Show you care more than they do right now about their progress",
+            "principle": "If student can make teacher give up through pain, they've won = do nothing"
+          },
+          "purpose": "Demonstrate unwavering commitment",
+          "rationale": "Hiders need to see you won't abandon them"
         }
-      ]
+      },
+      
+      "aiCoachImplementation": {
+        "detectionSignals": [
+          "Extremely minimal responses",
+          "Long delays before answering",
+          "One-word answers only",
+          "Deflection or subject changes",
+          "Repeated 'I don't know' (but soft, not confrontational)"
+        ],
+        
+        "responseProtocol": {
+          "approach": "Gentle persistence",
+          "tactics": [
+            "Frequent low-pressure check-ins",
+            "Tiniest possible task requests",
+            "Excessive praise for minimal effort",
+            "Never give up, never move on",
+            "Accept slow progress pace"
+          ],
+          "tone": "Patient, supportive, non-judgmental, infinitely persistent"
+        },
+        
+        "exampleInteraction": {
+          "student": "...",
+          "aiResponse": "No pressure, just want to see you try something small. Can you just write one word about what you think? Anything that comes to mind.",
+          "studentContinued": "I don't know",
+          "aiFollowUp": "That's okay. Let me make it even simpler - can you just copy the first word from the question? That's all I need right now.",
+          "rationale": "Lower bar to ground level, make failure impossible"
+        }
+      },
+      
+      "progressIndicators": {
+        "early": [
+          "Writes one word after extensive prompting",
+          "Makes eye contact (if video)",
+          "Responds in more than one word occasionally"
+        ],
+        "developing": [
+          "Attempts small task without extensive prompting",
+          "Asks clarifying question",
+          "Completes simple task independently"
+        ],
+        "established": [
+          "Self-initiates work",
+          "Takes risks with answers",
+          "Participates more freely"
+        ]
+      },
+      
+      "timelineExpectation": {
+        "initial": "Weeks to get first real attempt",
+        "momentum": "Months to build consistent engagement",
+        "independence": "Many months to year+ for self-direction",
+        "reality": "Slowest progress of all barrier types"
+      },
+      
+      "resourceRequirements": {
+        "timeInvestment": "Massive - 10+ hours per week per student",
+        "emotionalToll": "High - very little visible progress for extended periods",
+        "patience": "Extreme - must accept glacial pace",
+        "commitment": "Total - cannot give up, ever"
+      }
     },
+
     {
       "id": "quiet_playful_avoider",
       "name": "Quiet Playful Avoider / Constant Play State",
       "category": "maturity_barrier_or_trauma_response",
-      "description": "Student prefers play and social interaction, quietly avoids work without confrontation",
-      "activatedETPs": ["play", "social_connection", "comfort", "avoidance"],
-      "avoidanceTactics": [
-        "engage_in_play_instead_of_work",
-        "socialize_quietly",
-        "appear_busy_while_avoiding",
-        "redirect_to_games_and_fun"
-      ],
-      "effectiveLevers": [
-        {
-          "name": "play_at_their_level",
-          "description": "Meet them in their play space without shame",
-          "steps": [
-            "Join their play activity authentically",
-            "Build relationship through playful interaction",
-            "Gradually introduce work elements into play",
-            "Frame work as collaborative fun",
-            "Never shame the play impulse"
-          ],
-          "etpReduction": ["shame", "rejection", "pressure"],
-          "brainStateTarget": "build_trust_through_play"
+      
+      "manifestations": {
+        "observable": [
+          "Stays quiet (doesn't disrupt vocally)",
+          "Almost constant state of play during work time",
+          "Fidgeting, doodling, toy manipulation",
+          "Physical play behaviors (tapping, moving objects)",
+          "Attention on everything except the task",
+          "Lacks apparent work maturity"
+        ],
+        "verbal": [
+          "Minimal verbal disruption",
+          "When engaged, responses often playful or silly",
+          "May make jokes or off-topic comments",
+          "Immature communication patterns"
+        ],
+        "paradox": "Quiet enough not to be 'problem student' but never actually working"
+      },
+      
+      "diagnosticAmbiguity": {
+        "question": "Nature vs nurture - is this developmental immaturity or trauma hiding place?",
+        "possibleCauses": [
+          {
+            "hypothesis": "Developmental lag",
+            "indicators": [
+              "Consistent across all contexts",
+              "No sudden onset",
+              "Genuine lack of work maturity skills",
+              "Play is exploratory, not anxious"
+            ],
+            "implication": "Needs maturity scaffolding and developmentally appropriate engagement"
+          },
+          {
+            "hypothesis": "Trauma response",
+            "indicators": [
+              "Play is defensive/avoidant",
+              "Increased when anxiety triggers present",
+              "Regression from previous capability",
+              "Play feels compulsive, not joyful",
+              "Shutdown when shame/pressure applied"
+            ],
+            "implication": "Play is hiding place from classroom trauma or external trauma - safety first"
+          }
+        ],
+        "aiCoachChallenge": "Cannot definitively diagnose - must design intervention that works for both scenarios"
+      },
+      
+      "underlyingCauses": {
+        "primaryDevelopment": "Lack of maturity skills for sustained work engagement",
+        "primaryTrauma": "Play as defensive hiding place from anxiety/threat",
+        "secondary": [
+          "Understimulation (boredom drives play seeking)",
+          "Overstimulation (play regulates sensory overload)",
+          "Escape from failure anxiety",
+          "Lack of intrinsic motivation for academic tasks",
+          "Attention regulation difficulties"
+        ],
+        "etpActivation": [
+          "comfort (play feels safe)",
+          "autonomy (play = self-directed)",
+          "threat_avoidance (play = not-work = no failure risk)",
+          "belonging (playing aligns with younger peer group if developmental)",
+          "shame_avoidance (work = exposure risk)"
+        ]
+      },
+      
+      "interventionStrategy": {
+        "corePrinciple": "Meet at their level, draw toward maturity, keep it fun, AVOID SHAME AT ALL COSTS",
+        
+        "phase1_playAtTheirLevel": {
+          "name": "Engage Through Play, Not Against It",
+          "implementation": {
+            "approach": "Start where they are, not where you want them to be",
+            "methods": [
+              "Use playful entry points to content (games, puzzles, movement)",
+              "Gamify initial tasks (points, levels, achievements)",
+              "Allow fidget/play objects during work (don't fight this)",
+              "Frame learning as play ('Let's explore...' not 'You must do...')",
+              "Use humor, lightness, fun tone consistently"
+            ],
+            "keyInsight": "Fighting play = triggering shame = regression. Work WITH play impulse."
+          },
+          "rationale": "Play is their current operating system - meet them there first",
+          "aiImplementation": {
+            "tone": "Light, playful, curious, game-like",
+            "framing": [
+              "Let's try this challenge...",
+              "Can you beat this puzzle?",
+              "Let's explore this together...",
+              "What happens if we...?"
+            ],
+            "avoid": [
+              "Serious, stern tone",
+              "Criticism of play behaviors",
+              "'Stop playing and focus'",
+              "Comparisons to more mature peers"
+            ]
+          }
         },
-        {
-          "name": "play_break_graduation",
-          "description": "Structured progression from play to work with gradual extension",
-          "steps": [
-            "Stage 1: Work 5 min → 5 min play break",
-            "Stage 2: Work until natural break → play reward",
-            "Stage 3: Exam period concentration (no breaks during task)",
-            "Stage 4: Transition to praise-based motivation"
-          ],
-          "etpReduction": ["boredom", "frustration", "pressure"],
-          "brainStateTarget": "gradually_build_concentration"
+        
+        "phase2_playBreakGraduation": {
+          "name": "Gradual Maturity Scaffolding Through Structured Progression",
+          "implementation": {
+            "stage1_concentration": {
+              "name": "Build Basic Focus Capacity",
+              "structure": "Work 5 minutes → Play break 5 minutes",
+              "workDefinition": "Genuine engagement with task, not token effort",
+              "playBreak": "Structured play time (game, doodle, movement)",
+              "purpose": "Establish that focused work is possible and rewarded",
+              "duration": "2-4 weeks"
+            },
+            "stage2_rewards": {
+              "name": "Extend Work Capacity",
+              "structure": "Work until natural break point → Play reward",
+              "workDefinition": "Complete small task or reach checkpoint",
+              "playBreak": "5-10 minutes of choice play",
+              "purpose": "Build stamina, work feels achievable",
+              "duration": "4-8 weeks"
+            },
+            "stage3_examPeriod": {
+              "name": "Sustained Concentration Practice",
+              "structure": "Work until task completion (no breaks during)",
+              "workDefinition": "Exam-like sustained focus",
+              "playBreak": "Extended play time after completion",
+              "purpose": "Simulate real performance conditions",
+              "duration": "Final 2-4 weeks before assessments"
+            },
+            "stage4_praise": {
+              "name": "Intrinsic Motivation Emergence",
+              "structure": "Self-regulated work, praise-based recognition",
+              "playBreak": "Not needed - work becomes self-rewarding",
+              "purpose": "Transition to internal motivation",
+              "duration": "Ongoing, may take months"
+            }
+          },
+          "progressionCriteria": {
+            "stage1to2": "Consistently completes 5-minute focus periods",
+            "stage2to3": "Completes tasks without excessive prompting",
+            "stage3to4": "Shows intrinsic interest in learning",
+            "regression": "If failure rate high, step back to previous stage"
+          },
+          "aiImplementation": {
+            "tracking": "Monitor work duration and quality per interaction",
+            "rewardGeneration": "Generate time-limited play access codes",
+            "adaptiveAdjustment": "Automatically adjust stage based on success rate"
+          }
+        },
+        
+        "phase3_keepItFun": {
+          "name": "Maintain Playful Engagement Throughout",
+          "implementation": {
+            "principle": "Learning doesn't have to be serious to be effective",
+            "methods": [
+              "Use game mechanics (points, progress bars, unlockables)",
+              "Inject humor and silliness into content delivery",
+              "Celebrate attempts with playful feedback",
+              "Frame challenges as adventures or quests",
+              "Allow creative expression in responses"
+            ],
+            "keyInsight": "They'll mature toward 'serious work' when it's safe and rewarding - forcing it triggers shutdown"
+          },
+          "rationale": "Play is not opposite of learning - it's a legitimate learning mode",
+          "aiImplementation": {
+            "language": "Playful, encouraging, light",
+            "feedback": "Fun animations, sound effects (if available), celebratory language",
+            "taskPresentation": "Story-based, game-based, adventure-based framing"
+          }
+        },
+        
+        "phase4_avoidShameResponses": {
+          "name": "CRITICAL: Prevent Shame Spirals",
+          "implementation": {
+            "awareness": "If this is trauma response, shame will trigger regression/shutdown",
+            "shameTriggers": [
+              "Public calling out of immature behavior",
+              "Comparison to 'mature' peers ('Why can't you be like...')",
+              "Explicit criticism of play behaviors ('Stop playing')",
+              "Frustrated tone about their level ('You should be past this')",
+              "Demanding immediate adult behavior ('Act your age')",
+              "Humiliation or mockery of playfulness",
+              "Labeling as 'immature' or 'babyish'"
+            ],
+            "replacementApproach": [
+              "Private, gentle redirects only",
+              "Reframe play as bridge to work ('Let's turn this into...')",
+              "Celebrate tiny maturity gains enthusiastically",
+              "Acknowledge effort, not just outcome",
+              "Patient, consistent expectations without frustration",
+              "Never compare to others - only compare to their past self",
+              "Normalize developmental variation ('Everyone learns differently')"
+            ],
+            "ifShameTriggered": {
+              "recognition": "Shutdown, regression, increased play, tears, anger",
+              "response": [
+                "Immediate de-escalation",
+                "Explicit apology if adult triggered it",
+                "Reassurance of safety and acceptance",
+                "Return to Phase 1 (meet at their level)",
+                "Rebuild trust before attempting progression"
+              ]
+            }
+          },
+          "rationale": "Shame is the enemy of development - triggers defense, not growth",
+          "aiImplementation": {
+            "design": "AI cannot feel frustrated - built-in advantage",
+            "tone": "Always patient, never judgmental",
+            "feedback": "Never use negative comparisons",
+            "errors": "Reframe as learning opportunities, not failures"
+          }
         }
-      ]
+      },
+      
+      "aiCoachImplementation": {
+        "detectionSignals": [
+          "Off-topic responses (doodling with words, tangents)",
+          "Playful language when task is serious",
+          "Very short, minimal effort responses",
+          "Fidget-like text behaviors (emojis, random characters)",
+          "Requests to do something else",
+          "Disengagement after very short time"
+        ],
+        
+        "initialAssessment": {
+          "purpose": "Determine if developmental or trauma-based",
+          "approach": "Cannot definitively diagnose - design for both",
+          "indicators": {
+            "likelyDevelopmental": [
+              "Consistent playfulness across topics",
+              "Genuine curiosity when play-framed",
+              "Responds well to game-ification",
+              "No shutdown when gently redirected"
+            ],
+            "likelyTrauma": [
+              "Play intensifies with pressure",
+              "Shutdown when challenged",
+              "Anxious quality to play (compulsive)",
+              "Regression from previous capability"
+            ]
+          },
+          "aiStrategy": "Design intervention that works for BOTH - safest approach"
+        },
+        
+        "responseProtocol": {
+          "stage1_playfulEngagement": {
+            "trigger": "Initial detection of pattern",
+            "response": "Reframe current task as game/challenge",
+            "example": {
+              "task": "Write paragraph about photosynthesis",
+              "playfulReframe": "Let's play detective - photosynthesis is like a factory. Can you figure out what the 'machines' are and what they make?"
+            },
+            "tone": "Curious, adventurous, fun"
+          },
+          "stage2_microTaskWithReward": {
+            "trigger": "Engagement achieved, need to build capacity",
+            "response": "5-minute focus challenge with play reward",
+            "example": "Let's try this for 5 minutes - if you stick with it, you get 5 minutes to explore any topic you want",
+            "tracking": "Monitor completion rate"
+          },
+          "stage3_gradualExtension": {
+            "trigger": "Consistent 5-minute success",
+            "response": "Extend to task completion with play reward",
+            "example": "You've been nailing the 5-minute challenges! Ready to try a whole task? Big reward at the end.",
+            "adjustment": "If failure, return to shorter intervals"
+          },
+          "stage4_praiseTransition": {
+            "trigger": "Consistent task completion",
+            "response": "Reduce play rewards, increase intrinsic framing",
+            "example": "You're getting really good at this! I bet you're noticing how much you can do now.",
+            "goal": "Shift from extrinsic to intrinsic motivation"
+          }
+        },
+        
+        "playRewardGeneration": {
+          "mechanism": "Generate time-limited codes for game access or free exploration",
+          "duration": "5-10 minutes initially, extend as capacity builds",
+          "content": [
+            "Educational games",
+            "Creative tools (drawing, music)",
+            "Exploration time (Wikipedia, science sites)",
+            "Physical movement breaks (if local app)"
+          ],
+          "tracking": "Monitor reward usage patterns",
+          "transition": "Gradually reduce frequency as intrinsic motivation emerges"
+        },
+        
+        "shamePrevention": {
+          "design": "AI has no frustration - natural advantage",
+          "rules": [
+            "Never express impatience",
+            "Never compare to other students",
+            "Never criticize play behaviors directly",
+            "Always celebrate progress, no matter how small",
+            "Frame redirects as invitations, not demands"
+          ],
+          "languagePatterns": {
+            "avoid": [
+              "'You need to focus'",
+              "'Stop playing around'",
+              "'Be serious'",
+              "'You're acting like a baby'",
+              "'Other students can do this'"
+            ],
+            "use": [
+              "'Let's try this together'",
+              "'I have a fun challenge for you'",
+              "'You're making progress!'",
+              "'That was a great attempt'",
+              "'Let's see what you can do'"
+            ]
+          }
+        },
+        
+        "adaptiveAdjustment": {
+          "successIndicators": [
+            "Increasing work duration",
+            "Decreasing play reward requests",
+            "More on-topic responses",
+            "Self-initiated task attempts",
+            "Expressions of interest in content"
+          ],
+          "failureIndicators": [
+            "Increasing avoidance",
+            "Shorter engagement times",
+            "More off-topic responses",
+            "Shutdown behaviors",
+            "Requests to stop"
+          ],
+          "adjustmentLogic": {
+            "onSuccess": "Gradually extend requirements, reduce rewards",
+            "onFailure": "Return to previous stage, investigate cause",
+            "onShutdown": "Immediate return to Phase 1, rebuild safety"
+          }
+        }
+      },
+      
+      "progressIndicators": {
+        "early": [
+          "Engages with play-framed tasks",
+          "Completes 5-minute focus periods",
+          "Shows curiosity about content when gamified",
+          "Responds positively to playful tone"
+        ],
+        "developing": [
+          "Extends focus to 10-15 minutes",
+          "Completes tasks without constant play breaks",
+          "Shows intrinsic interest occasionally",
+          "Asks questions about content"
+        ],
+        "established": [
+          "Works for extended periods",
+          "Self-regulates play breaks",
+          "Intrinsic motivation emerging",
+          "Playfulness becomes creative expression, not avoidance"
+        ]
+      },
+      
+      "commonPitfalls": {
+        "forcingMaturity": {
+          "mistake": "Demanding 'serious' behavior immediately",
+          "result": "Shame trigger → shutdown or increased play",
+          "correction": "Accept current level, scaffold gradually"
+        },
+        "eliminatingPlay": {
+          "mistake": "Trying to stop all play behaviors",
+          "result": "Fighting their coping mechanism = increased resistance",
+          "correction": "Work WITH play impulse, channel into learning"
+        },
+        "publicShaming": {
+          "mistake": "Calling out immature behavior in front of others",
+          "result": "Severe shame trigger, trust destroyed",
+          "correction": "All redirects must be private, gentle, supportive"
+        },
+        "inconsistentStructure": {
+          "mistake": "Randomly allowing/denying play breaks",
+          "result": "Confusion, insecurity, regression",
+          "correction": "Clear, consistent play break structure"
+        },
+        "rushingProgression": {
+          "mistake": "Moving to next stage before ready",
+          "result": "Failure experience, loss of confidence",
+          "correction": "Wait for consistent success before advancing"
+        }
+      },
+      
+      "timelineExpectation": {
+        "initialEngagement": "First session - play framing gets participation",
+        "stage1": "2-4 weeks - building 5-minute focus capacity",
+        "stage2": "4-8 weeks - extending to task completion",
+        "stage3": "8-12 weeks - sustained concentration emerging",
+        "stage4": "3-6 months - intrinsic motivation developing",
+        "reality": "Highly variable - some progress faster, some need longer at each stage"
+      },
+      
+      "specialConsiderations": {
+        "traumaResponse": {
+          "ifSuspected": [
+            "Prioritize safety above all",
+            "Never force if shutdown occurs",
+            "Consider professional referral",
+            "Focus on relationship building",
+            "Accept slower progression"
+          ]
+        },
+        "neurodevelopmental": {
+          "possibilities": ["ADHD", "ASD", "developmental delay"],
+          "adaptations": [
+            "Shorter focus intervals",
+            "More frequent breaks",
+            "Sensory accommodations",
+            "Clear visual structure",
+            "Explicit expectations"
+          ]
+        },
+        "ageConsiderations": {
+          "younger": "More play = developmentally appropriate",
+          "older": "Play may indicate regression or trauma - investigate gently"
+        }
+      }
     },
+
     {
       "id": "high_achiever_underengaged",
       "name": "High Achiever / Intrinsically Motivated but Underengaged",
       "category": "enrichment_barrier",
-      "description": "Student with strong home support and baseline motivation, but risks burnout",
-      "activatedETPs": ["achievement", "status", "mastery", "pressure"],
-      "avoidanceTactics": [
-        "constant_work_panic",
-        "perfectionism",
-        "inability_to_stop"
-      ],
-      "effectiveLevers": [
-        {
-          "name": "mental_health_override",
-          "description": "Push back against constant work panic explicitly",
-          "steps": [
-            "Identify students in constant work mode",
-            "Direct conversation: 'You need to stop sometimes'",
-            "Frame rest as performance enhancer",
-            "Provide permission to not work",
-            "Monitor for burnout signs"
-          ],
-          "etpReduction": ["panic", "pressure"],
-          "brainStateTarget": "prevent_burnout"
+      
+      "manifestations": {
+        "observable": [
+          "Completes work quickly and correctly",
+          "Gets bored with standard material",
+          "Finishes early and disengages",
+          "May become disruptive when unchallenged",
+          "Shows interest in tangential topics",
+          "Asks questions beyond scope of lesson",
+          "Seeks connections to broader context"
+        ],
+        "verbal": [
+          "This is too easy",
+          "I already know this",
+          "When do we do something interesting?",
+          "Why are we learning this?",
+          "What's this used for in real life?",
+          "Can I do something else?"
+        ],
+        "paradox": "High capability but low engagement - waste of potential"
+      },
+      
+      "underlyingCauses": {
+        "primary": "Material is below capability level - no intellectual challenge",
+        "secondary": [
+          "No clear pathway to goals/interests",
+          "Curriculum doesn't connect to real applications",
+          "Repetitive practice of mastered skills",
+          "No exposure to advanced concepts",
+          "Lack of depth or complexity",
+          "No autonomy in learning direction"
+        ],
+        "etpActivation": [
+          "boredom (understimulation)",
+          "status (not being challenged undermines sense of competence)",
+          "curiosity (natural drive for complexity unsatisfied)",
+          "autonomy (wants choice in learning path)",
+          "mastery (seeks progression, not repetition)"
+        ]
+      },
+      
+      "interventionStrategy": {
+        "principle": "Keep them interested with high-level material, connections to context, and pathways to different goals",
+        
+        "phase1_assessTrueCapability": {
+          "name": "Determine Actual Level vs. Perceived Level",
+          "implementation": {
+            "approach": "Test with progressively harder material",
+            "method": [
+              "Skip ahead in curriculum to find challenge point",
+              "Introduce advanced concepts to gauge comprehension",
+              "Test depth of understanding, not just surface knowledge",
+              "Identify gaps vs. genuine advanced capability"
+            ],
+            "purpose": "Some students think they know more than they do - verify first"
+          },
+          "outcomes": {
+            "genuinelyAdvanced": "Proceed with enrichment strategy",
+            "overconfident": "Reveal gaps, rebuild with appropriate challenge level",
+            "unevenSkills": "Advanced in some areas, needs foundation in others"
+          }
         },
-        {
-          "name": "advanced_content_feeding",
-          "description": "Keep them interested with challenging material",
-          "steps": [
-            "Provide access to advanced/university level content",
-            "Frame as 'grown-up treatment'",
-            "Connect to real-world applications",
-            "Let them show off knowledge to parents"
-          ],
-          "etpReduction": ["boredom"],
-          "brainStateTarget": "maintain_engagement"
+        
+        "phase2_provideHighLevelMaterial": {
+          "name": "Introduce Advanced Concepts and Complexity",
+          "implementation": {
+            "acceleration": {
+              "description": "Move ahead in curriculum",
+              "methods": [
+                "Skip mastered material",
+                "Access next grade level content",
+                "Compact curriculum (cover more in less time)",
+                "Self-paced progression"
+              ],
+              "monitoring": "Ensure foundation solid before skipping"
+            },
+            "enrichment": {
+              "description": "Go deeper, not just faster",
+              "methods": [
+                "Explore why/how, not just what",
+                "Introduce related advanced concepts",
+                "Real-world applications and complexity",
+                "Historical context and development",
+                "Cutting-edge applications"
+              ],
+              "purpose": "Build depth and connections, not just speed"
+            },
+            "extension": {
+              "description": "Apply to novel contexts",
+              "methods": [
+                "Open-ended problems with multiple solutions",
+                "Cross-disciplinary applications",
+                "Research-style investigations",
+                "Create own problems/projects"
+              ],
+              "purpose": "Use knowledge creatively"
+            }
+          },
+          
+          "examples": {
+            "mathematics": {
+              "basic": "Solve 10 addition problems",
+              "enriched": "Explore why addition is commutative - prove it, find where it doesn't apply",
+              "extended": "Design a number system where addition isn't commutative"
+            },
+            "science": {
+              "basic": "Label parts of a cell",
+              "enriched": "How do cells specialize? Explore epigenetics",
+              "extended": "Research current stem cell therapy - how does it work?"
+            },
+            "literature": {
+              "basic": "Read chapter, answer comprehension questions",
+              "enriched": "Analyze author's narrative technique, compare to other works",
+              "extended": "Write alternative ending exploring different theme"
+            }
+          }
+        },
+        
+        "phase3_connectToContext": {
+          "name": "Show Real-World Applications and Broader Significance",
+          "implementation": {
+            "why_this_matters": {
+              "description": "Answer the 'why are we learning this?' question",
+              "approaches": [
+                "Current real-world applications",
+                "Historical significance and development",
+                "Future implications and research",
+                "Cross-disciplinary connections",
+                "Personal relevance to student's interests/goals"
+              ]
+            },
+            "expert_perspectives": {
+              "description": "Show how professionals use this knowledge",
+              "methods": [
+                "Case studies from real practitioners",
+                "Interview transcripts or videos with experts",
+                "Problems that professionals actually solve",
+                "Current research and open questions"
+              ]
+            },
+            "big_picture": {
+              "description": "Connect to overarching concepts and frameworks",
+              "approaches": [
+                "How this fits into larger field",
+                "Connections between disciplines",
+                "Fundamental principles underlying specific content",
+                "Progression of ideas through history"
+              ]
+            }
+          },
+          
+          "examples": {
+            "algebra": {
+              "context": "Used in cryptography (secure messaging), machine learning algorithms, financial modeling, physics equations",
+              "expert": "Show how data scientists use algebra to build recommendation systems",
+              "bigPicture": "Algebra is language of relationships - any time you have variables that affect each other"
+            },
+            "grammar": {
+              "context": "Professional writing, persuasive communication, clarity in technical fields",
+              "expert": "How lawyers use precise language, how miscommunication causes errors",
+              "bigPicture": "Language precision = thought precision - fuzzy language = fuzzy thinking"
+            }
+          }
+        },
+        
+        "phase4_pathwaysToGoals": {
+          "name": "Connect Learning to Student's Aspirations and Interests",
+          "implementation": {
+            "goal_mapping": {
+              "description": "Explicit connections between current learning and future goals",
+              "process": [
+                "Identify student's interests and aspirations",
+                "Map curriculum to those goals",
+                "Show progression pathway",
+                "Highlight prerequisite relationships",
+                "Reveal gatekeepers (this unlocks that)"
+              ],
+              "motivation": "Make learning purposeful, not arbitrary"
+            },
+            "multiple_pathways": {
+              "description": "Show how same knowledge applies to different goals",
+              "approach": [
+                "If interested in medicine: biology → anatomy → physiology → pathology",
+                "If interested in engineering: math → physics → design → innovation",
+                "If interested in law: language → logic → argumentation → persuasion",
+                "If interested in business: data → analysis → strategy → decision-making"
+              ],
+              "purpose": "Demonstrate versatility and relevance"
+            },
+            "choice_and_autonomy": {
+              "description": "Allow student to choose learning direction within boundaries",
+              "methods": [
+                "Choice of topics within subject",
+                "Choose depth vs. breadth approach",
+                "Select project focus area",
+                "Pick application context that interests them"
+              ],
+              "rationale": "Autonomy increases intrinsic motivation"
+            }
+          },
+          
+          "personalization": {
+            "using_interests": {
+              "description": "Frame advanced content through student's interests",
+              "examples": [
+                "Gaming interest → game theory, probability, algorithm design",
+                "Sports interest → statistics, biomechanics, strategy optimization",
+                "Music interest → mathematics of sound, acoustics, signal processing",
+                "Space interest → physics, orbital mechanics, cosmology"
+              ]
+            },
+            "career_pathways": {
+              "description": "Explicit career preparation",
+              "content": [
+                "What do professionals in this field actually do?",
+                "What knowledge/skills do they use daily?",
+                "How did they get there? (educational pathway)",
+                "What problems are they solving?",
+                "What's cutting-edge in this field?"
+              ]
+            }
+          }
+        },
+        
+        "phase5_intellectualCommunity": {
+          "name": "Connect with Peers at Similar Level",
+          "implementation": {
+            "peer_collaboration": {
+              "description": "Work with others who can challenge them",
+              "methods": [
+                "Group advanced students together",
+                "Online communities for gifted learners",
+                "Competitions and challenges",
+                "Peer tutoring (teaching reinforces learning)"
+              ]
+            },
+            "mentorship": {
+              "description": "Connect with experts or advanced students",
+              "options": [
+                "Subject matter experts",
+                "University students in field",
+                "Professionals willing to mentor",
+                "Online expert communities"
+              ]
+            }
+          }
         }
-      ]
+      },
+      
+      "aiCoachImplementation": {
+        "detectionSignals": [
+          "Completes tasks very quickly",
+          "Answers are consistently correct",
+          "Asks questions beyond scope",
+          "Expresses boredom explicitly",
+          "Requests harder material",
+          "Brings up related advanced topics",
+          "Shows frustration with pace"
+        ],
+        
+        "assessmentProtocol": {
+          "step1_verifyCapability": {
+            "method": "Progressively harder questions",
+            "purpose": "Distinguish genuine advancement from overconfidence",
+            "questions": [
+              "Start at grade level + 1",
+              "If correct, jump to grade level + 2",
+              "Continue until struggle point found",
+              "Test depth: 'Explain why that works'",
+              "Test transfer: 'Apply this to new context'"
+            ]
+          },
+          "step2_identifyGaps": {
+            "method": "Probe foundation in different areas",
+            "purpose": "Find uneven development",
+            "approach": "May be advanced in computation but weak in problem-solving, or vice versa"
+          },
+          "step3_assessInterests": {
+            "method": "Ask about goals, interests, curiosity areas",
+            "purpose": "Personalize enrichment direction",
+            "questions": [
+              "What do you want to do when you're older?",
+              "What topics fascinate you?",
+              "If you could learn anything, what would it be?",
+              "What problems do you want to solve?"
+            ]
+          }
+        },
+        
+        "responseStrategy": {
+          "immediate_challenge": {
+            "when": "Student expresses boredom",
+            "response": "Let's skip ahead. I'm going to give you something harder - let me know if this is more interesting.",
+            "method": "Provide grade+ material immediately"
+          },
+          "depth_over_breadth": {
+            "when": "Student completes quickly",
+            "response": "Nice work. Now let me show you WHY that works and where it connects.",
+            "method": "Introduce underlying principles and connections"
+          },
+          "real_world_context": {
+            "when": "Student asks 'why are we learning this?'",
+            "response": "Great question! Here's how [profession] uses this every day...",
+            "method": "Provide concrete applications and expert perspectives"
+          },
+          "goal_connection": {
+            "when": "Student mentions interest or goal",
+            "response": "You want to [goal]? This connects directly - here's how...",
+            "method": "Explicit pathway mapping"
+          },
+          "autonomy_offering": {
+            "when": "Multiple interactions show sustained engagement",
+            "response": "You're doing great. Want to choose what we explore next?",
+            "method": "Offer choice within subject area"
+          }
+        },
+        
+        "contentGeneration": {
+          "advancedMaterial": {
+            "source": "Next grade curriculum, university intro material, expert content",
+            "adaptation": "Explain at appropriate language level but don't dumb down concepts",
+            "scaffolding": "Provide just enough support, not excessive hand-holding"
+          },
+          "contextProvision": {
+            "template": "[Concept] is used in [real application] by [professionals]. For example, [concrete case]. This connects to [bigger picture].",
+            "personalization": "Frame through student's known interests"
+          },
+          "pathwayMapping": {
+            "template": "If you want to [student goal], here's the progression: [current] → [next] → [advanced] → [professional]. Right now you're building [specific skill] which is essential for [next step].",
+            "visual": "Consider generating learning pathway diagrams"
+          }
+        },
+        
+        "pacing": {
+          "flexible": "Move as fast as student can handle",
+          "monitoring": "Watch for cognitive overload - too fast can overwhelm",
+          "balance": "Challenge without frustration",
+          "adjustment": "Slow down if struggle, speed up if easy"
+        },
+        
+        "celebrationFocus": {
+          "avoid": "Praising completion of easy tasks ('good job!')",
+          "instead": [
+            "Acknowledge intellectual achievement: 'That's sophisticated thinking'",
+            "Recognize effort on hard problems: 'You really wrestled with that'",
+            "Celebrate growth: 'You just learned something at university level'",
+            "Respect their capability: 'You're ready for harder challenges'"
+          ]
+        }
+      },
+      
+      "progressIndicators": {
+        "early": [
+          "Engages with advanced material",
+          "Asks fewer 'this is boring' comments",
+          "Shows curiosity about context and connections",
+          "Completes challenging work with satisfaction"
+        ],
+        "developing": [
+          "Self-directs learning in interest areas",
+          "Seeks out harder challenges",
+          "Makes connections independently",
+          "Shows sustained engagement over time"
+        ],
+        "established": [
+          "Works at significantly advanced level",
+          "Intrinsically motivated by mastery",
+          "Self-regulates challenge level",
+          "Becomes resource for other students"
+        ]
+      },
+      
+      "commonPitfalls": {
+        "acceleration_without_depth": {
+          "problem": "Moving faster through shallow material",
+          "result": "Still bored, just covering more boring content faster",
+          "solution": "Enrich and extend, not just accelerate"
+        },
+        "assuming_universal_advancement": {
+          "problem": "Thinking 'gifted' means advanced in everything",
+          "result": "Missing gaps in foundation or uneven development",
+          "solution": "Assess each area separately"
+        },
+        "isolation": {
+          "problem": "Working alone on advanced material",
+          "result": "Social disconnection, lack of peer challenge",
+          "solution": "Connect with intellectual peers"
+        },
+        "excessive_praise": {
+          "problem": "Praising easy accomplishments",
+          "result": "Develops fixed mindset, avoids challenge",
+          "solution": "Praise effort on hard problems, acknowledge capability appropriately"
+        },
+        "ignoring_interests": {
+          "problem": "Advanced content in areas they don't care about",
+          "result": "Still disengaged despite higher level",
+          "solution": "Personalize through interests and goals"
+        }
+      },
+      
+      "timelineExpectation": {
+        "immediate": "Can engage with advanced material right away",
+        "weeks": "Should see sustained engagement and enthusiasm",
+        "months": "Self-directed learning in interest areas emerging",
+        "year": "Working significantly above grade level in strength areas"
+      },
+      
+      "specialConsiderations": {
+        "perfectionism": {
+          "risk": "Some high achievers fear failure on hard problems",
+          "manifestation": "Avoid challenge to maintain 'smart' identity",
+          "intervention": "Normalize struggle, celebrate productive failure, growth mindset"
+        },
+        "underachievement": {
+          "risk": "Capable but not performing due to chronic boredom",
+          "manifestation": "Disengagement leads to missing work, behavior issues",
+          "intervention": "Re-engage with challenge, show relevance urgently"
+        },
+        "social_challenges": {
+          "risk": "Intellectual differences from age peers",
+          "manifestation": "Loneliness, not fitting in",
+          "intervention": "Connect with similar-level peers, value multiple types of intelligence"
+        }
+      }
     }
-  ]
+  ],
+
+  "crossCuttingPrinciples": {
+    "capabilityAssessment": {
+      "principle": "You don't know what anyone is capable of until they are trying their best",
+      "implication": "All barrier interventions must first generate genuine effort",
+      "sequence": "1. Get effort → 2. Assess capability → 3. Calibrate support",
+      "error": "Assessing capability from avoidance behaviors is meaningless"
+    },
+    
+    "avoidanceTacticBlocking": {
+      "iDontKnow": {
+        "recognition": "'I don't know' is a huge avoidance tactic",
+        "response": "Ban as acceptable answer, require attempt",
+        "framing": "Not punishment, but 'I need to see your thinking'"
+      },
+      "copying": {
+        "recognition": "Copying prevents capability assessment",
+        "response": "Differentiate questions to eliminate copying opportunity",
+        "benefit": "Forces individual thinking, reveals actual understanding"
+      },
+      "quietHiding": {
+        "recognition": "Silence as invisibility strategy",
+        "response": "Proximity support, cannot hide when teacher right there",
+        "persistence": "Never let them succeed at avoiding through hiding"
+      }
+    },
+    
+    "rewardStrategy": {
+      "initial": "Game access for task completion (not perfection)",
+      "mechanism": "5-minute unlock code for genuine attempt",
+      "purpose": "Create momentum when intrinsic motivation absent",
+      "transition": "Gradually shift to intrinsic drivers as success experiences accumulate",
+      "danger": "Don't make it about rewards - kills long-term motivation",
+      "balance": "Use minimally, just enough to generate initial engagement"
+    },
+    
+    "emotionalManagement": {
+      "teacherChallenge": "Avoid letting your own emotions or reactions get in the way",
+      "aiAdvantage": "No emotional buttons to push - can stay consistent",
+      "humanRequirement": "Stay calm, don't take it personally, don't match their energy",
+      "principled": "Tune yourself to situation, not script"
+    }
+  },
+  
+  "implementationGuidance": {
+    "barrierDetection": {
+      "method": "Analyze student input for behavioral patterns",
+      "signals": [
+        "Language markers (dismissive, minimal, confrontational)",
+        "Engagement patterns (avoidance, resistance, initiation failure)",
+        "Response timing (delays, minimal effort)",
+        "Interaction history (consistent patterns over time)"
+      ]
+    },
+    
+    "interventionSelection": {
+      "factors": [
+        "Primary barrier type",
+        "Relationship phase (early/building/established)",
+        "Recent interaction history",
+        "Voltage level (current threat perception)",
+        "Progress indicators (what's worked before)"
+      ],
+      "decisionTree": "barrier_type → relationship_phase → voltage_check → intervention_select"
+    },
+    
+    "progressTracking": {
+      "metrics": [
+        "Engagement initiation (prompted vs self-initiated)",
+        "Avoidance tactic frequency",
+        "Task completion rate",
+        "Quality of attempts",
+        "Relationship indicators (conversation quality)"
+      ],
+      "timeline": "Non-linear - expect setbacks, celebrate micro-progress"
+    }
+  },
+  
+  "metadata": {
+    "version": "1.0",
+    "completionStatus": "foundation_complete",
+    "remainingWork": [
+      "Detailed AI response trees per barrier",
+      "Validation protocols",
+      "Integration with Skills Map scoring"
+    ]
+  }
 }

@@ -10,7 +10,10 @@
 - [x] Go module initialized
 - [x] Project structure organized
 - [x] **Backend: Go (decision finalized)** ✅
-- [x] **TypeScript backend removed** ✅ (consolidated to Go)
+- [x] **Complete classroom framework preserved** ✅ (moved to `/docs/reference/`)
+- [x] **Individual concepts being extracted** ✅ (for AI tutor MVP)
+- [x] **Deprecated code cleaned up** ✅ (removed `/project/backend/`)
+- [x] **Documentation consolidated** ✅ (moved to `/docs/`)
 
 ## Strategic Overview
 

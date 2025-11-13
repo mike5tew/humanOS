@@ -53,10 +53,7 @@ func (ao *AgenticOrchestrator) ProcessStudentMessage(
 	reasoning := []string{}
 
 	// 1. Safeguarding check (highest priority)
-	traumaResult, err := ao.traumaDetector.Scan(message, context.Age)
-	if err != nil {
-		return AgenticResponse{}, err
-	}
+	traumaResult := ao.traumaDetector.Scan(message, context.Age)
 
 	if traumaResult.Severity >= 3 {
 		reasoning = append(reasoning, "Safeguarding concern - escalating")
@@ -79,6 +76,7 @@ func (ao *AgenticOrchestrator) ProcessStudentMessage(
 
 	if topic != "" {
 		// Query CHISG for semantic understanding
+		var err error
 		knowledgeContext, err = ao.chisgClient.GetKnowledgeContext(topic, 0.5) // TODO: actual student level
 		if err != nil {
 			reasoning = append(reasoning, "CHISG unavailable, proceeding with emotion-only analysis")

@@ -2,6 +2,8 @@
   "ageGroups": [
     {
       "name": "Early Primary (5-7 years, Year 1-2)",
+      "ageRange": [5, 7],
+      "developmentalStage": "Preoperational",
       "characteristics": [
         "Concrete thinking only",
         "Short attention span (5-10 min)",
@@ -9,128 +11,196 @@
         "Very literal interpretation"
       ],
       "languageGuidelines": {
-        "vocabulary": "Simple, everyday words only",
-        "sentenceLength": "Short (5-8 words max)",
-        "concepts": "Concrete, visible, tangible",
-        "examples": [
-          "Good: 'Let's try this together'",
-          "Bad: 'Consider this approach'",
-          "Good: 'You did great!'",
-          "Bad: 'Your effort demonstrates growth'"
+        "vocabulary": {
+          "level": "very_simple",
+          "maxSyllables": 2,
+          "examples": {
+            "good": ["Let's try this together", "You did great!"],
+            "bad": ["Consider this approach", "Your effort demonstrates growth"]
+          }
+        },
+        "sentenceStructure": {
+          "maxWordsPerSentence": 8,
+          "structure": "Simple sentences only. One idea per sentence.",
+          "examples": {
+            "good": "You did a great job!",
+            "bad": "Your performance demonstrates significant improvement in analytical capability."
+          }
+        },
+        "concepts": {
+          "allowed": "Only concrete, immediate experiences. No hypotheticals.",
+          "examples": {
+            "good": "What color is this?",
+            "bad": "If we imagine a world where..."
+          }
+        },
+        "offenseRisks": [
+          {
+            "risk": "Condescension",
+            "trigger": "Using baby talk or extremely simple language",
+            "prevention": "Use normal grammar, just simpler words"
+          },
+          {
+            "risk": "Confusion",
+            "trigger": "Abstract concepts or metaphors",
+            "prevention": "Use only concrete examples they can see/touch"
+          },
+          {
+            "risk": "Overwhelm",
+            "trigger": "Too much information at once",
+            "prevention": "One idea per sentence, short paragraphs"
+          }
         ]
-      },
-      "emotionalCapabilities": {
-        "canUnderstand": ["happy", "sad", "angry", "scared", "excited"],
-        "developing": ["frustrated", "disappointed", "proud"],
-        "notYet": ["anxious", "conflicted", "ambivalent"]
       }
     },
     {
       "name": "Middle Primary (8-9 years, Year 3-4)",
+      "ageRange": [8, 9],
+      "developmentalStage": "Concrete Operational",
       "characteristics": [
-        "Beginning abstract thought",
-        "Attention span 15-20 min",
-        "Understanding cause-effect",
-        "Developing self-awareness"
+        "Can think logically about concrete events",
+        "Beginning to understand cause and effect",
+        "Can classify and sort objects",
+        "Need clear structure and rules",
+        "Developing independent thought"
       ],
       "languageGuidelines": {
-        "vocabulary": "Expand to include simple abstract terms",
-        "sentenceLength": "Moderate (8-12 words)",
-        "concepts": "Mix concrete with simple abstract",
-        "examples": [
-          "Good: 'This feels hard because it's new'",
-          "Bad: 'The cognitive load is challenging'",
-          "Good: 'Your brain is learning new patterns'",
-          "Bad: 'Neural plasticity is occurring'"
+        "vocabulary": {
+          "level": "simple",
+          "maxSyllables": 3,
+          "examples": {
+            "good": ["explain", "show", "why do you think", "what happens if"],
+            "bad": ["hypothetical", "theoretical", "synthesize"]
+          }
+        },
+        "sentenceStructure": {
+          "maxWordsPerSentence": 12,
+          "structure": "Simple and compound sentences. Can explain reasons.",
+          "examples": {
+            "good": "You answered correctly because you thought about what we learned.",
+            "bad": "The epistemological framework of constructivist pedagogy..."
+          }
+        },
+        "concepts": {
+          "allowed": "Real-world examples. Simple cause-and-effect. Basic comparisons.",
+          "examples": {
+            "good": "Math helps you count money when you go shopping",
+            "bad": "Mathematical abstraction enables higher-order cognition"
+          }
+        },
+        "offenseRisks": [
+          {
+            "risk": "Talking down",
+            "trigger": "Overly simple language for their age",
+            "prevention": "Respect their developing independence"
+          },
+          {
+            "risk": "Confusion",
+            "trigger": "Abstract concepts without concrete examples",
+            "prevention": "Always tie abstract ideas to real things"
+          }
         ]
-      },
-      "emotionalCapabilities": {
-        "canUnderstand": ["happy", "sad", "angry", "scared", "excited", "frustrated", "disappointed", "proud"],
-        "developing": ["anxious", "embarrassed", "jealous"],
-        "notYet": ["conflicted", "ambivalent", "resigned"]
-      }
-    },
-    {
-      "name": "Upper Primary (10-11 years, Year 5-6)",
-      "characteristics": [
-        "Abstract thinking developing",
-        "Attention span 20-30 min",
-        "Self-consciousness emerging",
-        "Peer opinion highly valued"
-      ],
-      "languageGuidelines": {
-        "vocabulary": "Can handle more complex terms with explanation",
-        "sentenceLength": "Full sentences (12-15 words)",
-        "concepts": "Abstract concepts with concrete examples",
-        "examples": [
-          "Good: 'Your brain builds new connections when you practice'",
-          "Bad: 'Neuroplasticity facilitates skill acquisition'",
-          "Good: 'Making mistakes is how we learn'",
-          "Bad: 'Error-driven learning optimizes cognitive schemas'"
-        ]
-      },
-      "emotionalCapabilities": {
-        "canUnderstand": ["most basic emotions", "embarrassed", "jealous", "anxious"],
-        "developing": ["conflicted feelings", "long-term consequences"],
-        "notYet": ["complex emotional trade-offs", "existential concepts"]
       }
     },
     {
       "name": "Early Secondary (11-13 years, Year 7-9)",
+      "ageRange": [11, 13],
+      "developmentalStage": "Early Formal Operational",
       "characteristics": [
-        "Abstract thinking established",
-        "Attention varies widely",
-        "Identity formation critical",
-        "Hormonal/emotional volatility"
+        "Beginning abstract thought",
+        "Can think about hypothetical situations",
+        "Developing logical reasoning",
+        "Strong peer influence",
+        "Identity formation beginning"
       ],
       "languageGuidelines": {
-        "vocabulary": "Adult vocabulary acceptable with context",
-        "sentenceLength": "Normal adult sentences",
-        "concepts": "Complex ideas with scaffolding",
-        "examples": [
-          "Good: 'Your prefrontal cortex is still developing—that's why planning ahead feels hard'",
-          "Good: 'Emotional reactions can override logical thinking'",
-          "Avoid: Condescending simplification",
-          "Avoid: Assuming adult emotional regulation"
+        "vocabulary": {
+          "level": "moderate",
+          "maxSyllables": 4,
+          "canIntroduce": ["analyze", "compare", "predict"],
+          "examples": {
+            "good": ["think about", "what if", "why do you think"],
+            "bad": []
+          }
+        },
+        "sentenceStructure": {
+          "maxWordsPerSentence": 15,
+          "structure": "Can use complex sentences with subordinate clauses.",
+          "examples": {
+            "good": "If you understand why this matters, you'll remember it better.",
+            "bad": "Keep it relatable to their experience"
+          }
+        },
+        "concepts": {
+          "allowed": "Real-world examples, hypotheticals, simple cause-and-effect chains",
+          "examples": {
+            "good": "Why might a student avoid starting homework?",
+            "bad": "Keep it relatable to their experience"
+          }
+        },
+        "offenseRisks": [
+          {
+            "risk": "Dismissiveness",
+            "trigger": "Treating them like younger children",
+            "prevention": "Respect their growing autonomy"
+          },
+          {
+            "risk": "Peer pressure sensitivity",
+            "trigger": "Public correction or embarrassment",
+            "prevention": "Private feedback, not in front of peers"
+          }
         ]
-      },
-      "emotionalCapabilities": {
-        "canUnderstand": ["complex emotions", "conflicting feelings", "social nuance"],
-        "developing": ["emotional regulation", "long-term thinking", "consequence assessment"],
-        "notYet": ["full prefrontal cortex function", "consistent self-regulation"]
       }
-    }
-  ],
-  "offenseRiskFactors": [
-    {
-      "issue": "Talking down / Condescension",
-      "riskGroups": ["10+"],
-      "examples": [
-        "Using baby talk with 10-year-olds",
-        "Over-simplifying for teenagers",
-        "Explaining obvious things"
-      ],
-      "prevention": "Match vocabulary to upper end of their capability"
     },
     {
-      "issue": "Age-inappropriate complexity",
-      "riskGroups": ["5-9"],
-      "examples": [
-        "Abstract psychological concepts with young children",
-        "Complex metaphors",
-        "Multi-step reasoning chains"
+      "name": "Secondary (14-16 years, Year 9-11)",
+      "ageRange": [14, 16],
+      "developmentalStage": "Formal Operational",
+      "characteristics": [
+        "Abstract thinking well-developed",
+        "Can reason about complex ideas",
+        "Self-consciousness and self-awareness high",
+        "Strong values and principles forming",
+        "Independence seeking"
       ],
-      "prevention": "Use concrete examples and simple language"
-    },
-    {
-      "issue": "Ignoring developmental stage",
-      "riskGroups": ["all"],
-      "examples": [
-        "Expecting 7-year-olds to plan long-term",
-        "Assuming 12-year-olds have emotional regulation",
-        "Treating all teenagers the same"
-      ],
-      "prevention": "Reference age-specific capabilities table before responding"
+      "languageGuidelines": {
+        "vocabulary": {
+          "level": "advanced",
+          "maxSyllables": 5,
+          "canIntroduce": ["synthesize", "evaluate", "analyze critically"],
+          "examples": {
+            "good": ["consider", "examine", "what's your perspective"],
+            "bad": []
+          }
+        },
+        "sentenceStructure": {
+          "maxWordsPerSentence": 20,
+          "structure": "Can use sophisticated sentence structures.",
+          "examples": {
+            "good": "By analyzing these patterns, you might discover why certain strategies work better.",
+            "bad": "Avoid overly academic language - stay relatable"
+          }
+        },
+        "concepts": {
+          "allowed": "Abstract concepts, hypotheticals, multi-step reasoning, ethics and values",
+          "examples": {
+            "good": "What are the ethical implications of this decision?",
+            "bad": "Overly academic language - stay relatable"
+          }
+        },
+        "offenseRisks": [
+          {
+            "risk": "Condescension",
+            "trigger": "Treating them like younger teens",
+            "prevention": "Respect their intellectual capability"
+          },
+          {
+            "risk": "Authority challenge",
+            "trigger": "Not acknowledging valid points",
+            "prevention": "Engage with their reasoning respectfully"
+          }
+        ]
+      }
     }
   ]
 }

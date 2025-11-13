@@ -15,6 +15,18 @@ import (
 
 type Server struct {
 	orchestrator *coach.Orchestrator
+	profiles     map[string]*StudentProfile // In-memory profile storage (for MVP)
+}
+
+// StudentProfile represents a student's current state
+type StudentProfile struct {
+	StudentID       string         `json:"student_id"`
+	Age             int            `json:"age"`
+	BrainState      etp.BrainState `json:"brain_state"`
+	ActiveBarriers  []string       `json:"active_barriers"`
+	RewardsEarned   int            `json:"rewards_earned"`
+	PlayBreakStage  string         `json:"play_break_stage"`
+	LastInteraction string         `json:"last_interaction"`
 }
 
 func main() {
@@ -34,6 +46,7 @@ func main() {
 
 	server := &Server{
 		orchestrator: orchestrator,
+		profiles:     make(map[string]*StudentProfile),
 	}
 
 	// Setup router
@@ -45,6 +58,7 @@ func main() {
 
 	// Routes
 	r.Post("/api/coach/message", server.handleCoachMessage)
+	r.Get("/api/student/{studentId}/profile", server.handleGetStudentProfile)
 	r.Get("/api/health", server.handleHealth)
 
 	// Start server
@@ -80,8 +94,31 @@ func (s *Server) handleCoachMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Update student profile
+	s.updateProfile(req.StudentID, req.Context, response)
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
+}
+
+func (s *Server) handleGetStudentProfile(w http.ResponseWriter, r *http.Request) {
+	studentID := chi.URLParam(r, "studentId")
+
+	// Get or create profile
+	profile, exists := s.profiles[studentID]
+	if !exists {
+		// Return default profile
+		profile = &StudentProfile{
+			StudentID:      studentID,
+			Age:            12, // Default age for testing
+			PlayBreakStage: "level_1",
+			RewardsEarned:  0,
+			ActiveBarriers: []string{},
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(profile)
 }
 
 func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
@@ -97,6 +134,39 @@ func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 			"intervention_selection",
 		},
 	})
+}
+
+func (s *Server) updateProfile(
+	studentID string,
+	context etp.StudentContext,
+	response *coach.CoachResponse,
+) {
+	profile, exists := s.profiles[studentID]
+	if !exists {
+		profile = &StudentProfile{
+			StudentID:      studentID,
+			Age:            context.Age,
+			PlayBreakStage: "level_1",
+			RewardsEarned:  0,
+		}
+	}
+
+	// Update brain state
+	profile.BrainState = context.BrainState
+
+	// Update barriers
+	profile.ActiveBarriers = response.DetectedBarriers
+
+	// Update rewards if earned
+	if response.RewardEarned {
+		profile.RewardsEarned++
+		// TODO: Implement play break stage progression
+	}
+
+	// Update last interaction
+	profile.LastInteraction = response.Timestamp
+
+	s.profiles[studentID] = profile
 }
 
 func getEnvOrDefault(key, defaultValue string) string {

@@ -18,13 +18,12 @@ type RoutineProfile struct {
 	FenceVoltage      float64 `json:"fence_voltage"`      // Pain level when routine is disrupted
 }
 
-// BrainState represents three-layer brain hierarchy
+// BrainState represents primal/emotional/rational levels
 type BrainState struct {
-	PrimalLevel    float64 `json:"primal_level"`    // 0-1: survival mode intensity
-	EmotionalLevel float64 `json:"emotional_level"` // 0-1: ETP activation level
-	RationalLevel  float64 `json:"rational_level"`  // 0-1: cortical thinking capacity
-	CurrentMode    string  `json:"current_mode"`    // "primal", "emotional", "rational"
-	OverrideRisk   float64 `json:"override_risk"`   // 0-1: risk of emotional override
+	PrimalLevel    float64 `json:"primal_level"`    // 0-1: Physical needs (hunger, tiredness)
+	EmotionalLevel float64 `json:"emotional_level"` // 0-1: Fear, frustration, overwhelm
+	RationalLevel  float64 `json:"rational_level"`  // 0-1: Cortical thinking capacity
+	OverrideRisk   float64 `json:"override_risk"`   // 0-1: Risk of brain stem takeover
 }
 
 // ETP represents an Emotional Trigger Point
@@ -151,6 +150,22 @@ type BarrierProfile struct {
 	BarrierStrength  float64  // 0 (no barrier) to 1 (fully suppressed)
 	EmotionalSources []string // Which ETPs create barrier: "fear_of_failure"
 }
+
+// VoltageProfile tracks emotional sensitivity
+type VoltageProfile struct {
+	BaselineVoltage float64 `json:"baseline_voltage"` // Resting fence voltage
+	GeneticFactor   float64 `json:"genetic_factor"`   // Innate sensitivity
+	LearnedFactor   float64 `json:"learned_factor"`   // Learned responses
+}
+
+// RelationshipPhase tracks trust building
+type RelationshipPhase string
+
+const (
+	PhaseEarly       RelationshipPhase = "early"       // No relationship yet
+	PhaseBuilding    RelationshipPhase = "building"    // Some trust forming
+	PhaseEstablished RelationshipPhase = "established" // Trust exists
+)
 
 // NeuroProfile models neurological hardware differences (neurodiversity)
 type NeuroProfile struct {
