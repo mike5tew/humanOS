@@ -73,6 +73,21 @@ func NewAgeAppropriateness(schemaPath string) (*AgeAppropriateness, error) {
 	}, nil
 }
 
+// getAgeGroup finds the appropriate age group for a given age
+func (aa *AgeAppropriateness) getAgeGroup(age int) *AgeGroup {
+	for i := range aa.ageGroups {
+		ageGroup := &aa.ageGroups[i]
+		if age >= ageGroup.AgeRange[0] && age <= ageGroup.AgeRange[1] {
+			return ageGroup
+		}
+	}
+	// If no exact match, find closest (oldest group)
+	if len(aa.ageGroups) > 0 {
+		return &aa.ageGroups[len(aa.ageGroups)-1]
+	}
+	return nil
+}
+
 // AdjustLanguage modifies response to be age-appropriate
 func (aa *AgeAppropriateness) AdjustLanguage(response string, age int) string {
 	ageGroup := aa.getAgeGroup(age)
